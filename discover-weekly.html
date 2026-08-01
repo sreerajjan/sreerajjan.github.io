@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sreeraj Janardhanan &mdash; Product</title>
+<title>Your listening data is lying about you &mdash; Sreeraj Janardhanan</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root {
@@ -122,51 +122,60 @@
   </nav>
 </header>
 
-<section class="hero">
-  <h2>Building product for consumers who don't read the manual.</h2>
-  <p class="lede">Senior PM. Nine years across fintech and automotive. Currently own consumer-facing product decisions on a 20M+ MAU lending platform &mdash; where I ship counterintuitive bets on funnels, run 150+ A/B tests a year, and build 0&rarr;1 AI-native surfaces.</p>
-  <p class="about">I got into product through the customer &mdash; not through engineering or MBA-issue frameworks. Which means the work I care about is where product decisions meet human behaviour: why people leave halfway through a loan application, why search fails silently, why the "best-practice" fix is often the wrong one. This site is a small collection of things I've shipped, torn down, or written about.</p>
-</section>
+<a class="back-link" href="index.html">Back to home</a>
 
-<section class="section">
-  <h3 class="section-head">Work</h3>
-  <p class="section-desc">Case studies of things I've shipped or led.</p>
+<article>
 
-  <a class="item" href="search-audit.html">
-    <p class="item-title">When search works for browsers but fails for owners <span class="item-meta live">Live</span></p>
-    <p class="item-desc">A 247-keyword audit of an Indian NBFC's search surface &mdash; and why half the platform's users were structurally underserved.</p>
-  </a>
+<h1 class="title">Your listening data is lying about you</h1>
+<p class="subtitle">How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead</p>
+<p class="meta">Essay &middot; Originally on <a href="https://www.linkedin.com/feed/update/urn:li:activity:7451648974681333761/" style="color: inherit; border-bottom: 1px solid var(--line);" target="_blank" rel="noopener">LinkedIn</a></p>
 
-  <a class="item" href="pdp-disclosure.html">
-    <p class="item-title">Why we made a lending PDP less transparent &mdash; and TSR jumped 15 points <span class="item-meta">Draft</span></p>
-    <p class="item-desc">A counterintuitive bet on progressive disclosure. Reframing a Personal Loan product page from a disclosure surface to an engagement surface.</p>
-  </a>
+<p class="hook">You stream death metal at the gym. Kishore Kumar on the drive home. Lo-fi beats at 2 AM and some Arijit Singh when no one's watching. If an algorithm tried to figure out who you are from this, it would have a nervous breakdown.</p>
 
-  <a class="item" href="meridian.html">
-    <p class="item-title">Meridian: an intelligence layer for a 20M-user platform <span class="item-meta">Draft</span></p>
-    <p class="item-desc">Building AI-native product inside a large NBFC &mdash; capture cards, tag stacks, and self-routing across loan products.</p>
-  </a>
-</section>
+<p>Yet one company built a billion-dollar feature by solving this exact problem &mdash; not by collecting more listening data, but by ignoring it.</p>
 
-<section class="section">
-  <h3 class="section-head">Teardowns</h3>
-  <p class="section-desc">Public products, examined with the same lens I use at work.</p>
+<h2>The noise</h2>
 
-  <a class="item" href="nykaa-teardown.html">
-    <p class="item-title">What Nykaa's search reveals about how beauty shoppers actually decide <span class="item-meta">Coming</span></p>
-    <p class="item-desc">Discovery, filtering, and the difference between browsing and buying on a category-heavy catalogue.</p>
-  </a>
-</section>
+<p>Every music platform in the early 2010s was chasing the same ghost. They tracked every stream, logged every skip, and tried to map similarities based on passive behaviour.</p>
 
-<section class="section">
-  <h3 class="section-head">Writing</h3>
-  <p class="section-desc">Occasional essays on product, taste, and the data we're not tracking. More coming.</p>
+<p>The problem? Streaming is messy. It's context-dependent.</p>
 
-  <a class="item" href="discover-weekly.html">
-    <p class="item-title">Your listening data is lying about you <span class="item-meta live">Live</span></p>
-    <p class="item-desc">How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead.</p>
-  </a>
-</section>
+<p>You don't stream the same music heartbroken at midnight and cooking Sunday lunch. Your stream history doesn't describe your taste &mdash; it describes your week.</p>
+
+<p>Most companies thought the answer was just <em>more data</em>. More features, heavier ML, more noise reduction.</p>
+
+<h2>The signal</h2>
+
+<p>Spotify took a different path. They stopped tracking what people consumed and started watching what people <strong>created</strong>.</p>
+
+<p>Not the algorithmic playlists &mdash; the ones <em>you</em> made. The ones where you dragged songs in, agonised over the order, and named it something only you understand.</p>
+
+<p>When you make a playlist, you're not just listening. You're making a decision. You're saying "these songs belong together."</p>
+
+<div class="callout">That's taste &mdash; expressed, not inferred.</div>
+
+<p>And the best part &mdash; you don't even know you're doing it. No one curates a playlist thinking "I'm revealing my taste." You're just vibing. But that unconscious act of putting songs together says more about you than a year of streaming data ever could.</p>
+
+<div class="article-image">
+  <img src="discover-weekly-graph.png" alt="Network graph showing how songs cluster in human-made playlists">
+  <p class="caption">Thicker line = songs appear together in more playlists. Clusters form naturally &mdash; not by genre, but by human curation.</p>
+</div>
+
+<h2>The action</h2>
+
+<p>Spotify trained their model on 700 million of these human-curated playlists.</p>
+
+<p>If <em>Channa Mereya</em> and <em>Tum Hi Ho</em> appear together in thousands of playlists made by strangers, that co-occurrence <em>is</em> the truth. The algorithm isn't guessing your mood &mdash; it's leveraging collective human intent.</p>
+
+<p>That insight became Discover Weekly. Launched in 2015. 100 million unique playlists generated every Monday. Users went into an existential crisis when it didn't update one week.</p>
+
+<p>Matt Ogle, the PM behind it, described the engine as <em>powered by all the curatorial actions of people on Spotify adding to playlists.</em></p>
+
+<p>Not streams. Not likes. What people <em>chose</em> to build.</p>
+
+<div class="callout">Sometimes the data point that changes everything isn't the one you're tracking &mdash; it's the one you're ignoring.</div>
+
+</article>
 
 <footer class="site">
   <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>

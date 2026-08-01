@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>When search works for browsers but fails for owners &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --accent: #1a4d7c;
+    --highlight: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  /* SITE HEADER (shared) */
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  /* LANDING PAGE */
+  .hero { margin-bottom: 72px; }
+  .hero h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 36px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .hero .lede { font-size: 20px; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; }
+  .hero .about { font-size: 17px; line-height: 1.7; color: var(--ink-2); margin: 0; }
+
+  .section { margin-bottom: 64px; }
+  .section-head { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 6px; }
+  .section-desc { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); margin: 0 0 28px; font-style: italic; }
+
+  .item { display: block; padding: 20px 0; border-bottom: 1px solid var(--line-2); text-decoration: none; color: inherit; }
+  .item:first-child { border-top: 1px solid var(--line-2); }
+  .item:hover { background: rgba(26, 77, 124, 0.03); }
+  .item:hover .item-title { color: var(--accent); }
+  .item-title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 19px; font-weight: 600; margin: 0 0 4px; letter-spacing: -0.01em; color: var(--ink); transition: color 0.15s; }
+  .item-desc { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); margin: 0; }
+  .item-meta { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-4); margin-left: 8px; padding: 2px 8px; border: 1px solid var(--line); border-radius: 3px; vertical-align: 2px; font-weight: 500; }
+  .item-meta.live { color: var(--accent); border-color: var(--accent); }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ARTICLE / CASE STUDY PAGES */
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul { margin: 0 0 18px; padding-left: 22px; }
+  article ul li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); background: transparent; border-bottom: 2px solid var(--ink); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.highlight td { background: #fff5f0; }
+  tr.highlight td strong { color: #b8480e; }
+
+  .footnote { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); font-style: italic; margin-top: -12px; margin-bottom: 24px; }
+
+  .article-image { margin: 32px 0; }
+  .article-image img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 4px; }
+  .article-image .caption { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-align: center; margin-top: 12px; font-style: italic; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  /* STUB PAGES */
+  .stub { text-align: left; padding: 40px 0; }
+  .stub .stub-label { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-3); margin: 0 0 20px; }
+  .stub h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 32px; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .stub .teaser { font-size: 19px; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; }
+  .stub .status { background: var(--highlight); padding: 18px 22px; border-radius: 4px; font-size: 15px; margin: 32px 0; }
+  .stub .status strong { display: block; margin-bottom: 4px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    .hero h2 { font-size: 28px; }
+    .hero .lede { font-size: 18px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 6px; }
+    .item-title { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">When search works for browsers but fails for owners</h1>
+<p class="subtitle">A 247-keyword audit of a major Indian NBFC's search surface</p>
+<p class="meta">April 2026 &middot; Mobile audit &middot; Case study</p>
+
+<p class="hook">Half of this platform's search volume comes from customers trying to check an order, download a statement, find a KYC form, verify their FASTag status. The search surface was designed only for the other half.</p>
+
+<h2>The finding that stopped me</h2>
+
+<p>For product discovery, 93% of queries return a relevant first result. For order and transaction servicing, 56% return nothing usable. For eligibility and credit score &mdash; a category small in count but existential in intent &mdash; 100% return zero relevant results.</p>
+
+<p>The search bar looks like one thing. It's two, and one of them is broken.</p>
+
+<h2>Why this matters</h2>
+
+<p>Search is not a feature on this platform &mdash; it is the platform's first destination. Roughly half of all sessions reach the search bar within five seconds of login. For new-to-brand users, search is where they decide whether the app understands them. For existing customers, search is where they go when navigation has already failed them.</p>
+
+<p>When search fails for a shopper, they browse. When search fails for an owner trying to download an NOC or check ECS status, they call the branch, or they leave.</p>
+
+<p>The volume-weighted question I set out to answer: <em>for every category of search intent, does the surface actually help?</em></p>
+
+<h2>The method</h2>
+
+<p><strong>247 keywords</strong>, sampled from 1.87M real search sessions. Designed to represent the head, torso, and long tail &mdash; not just top queries.</p>
+
+<p><strong>Mobile viewport (375&times;812)</strong>. All screenshots captured on real device dimensions, since &gt;80% of traffic is mobile.</p>
+
+<p><strong>Playwright instrumentation.</strong> Automated capture so the audit was reproducible &mdash; same keywords, same viewport, same session state, same day. Not one-off manual screenshots.</p>
+
+<p><strong>Two-layer scoring.</strong> Layer 1 asked whether the <em>right content</em> appeared &mdash; Spot On, Partial, or Zero. Layer 2 asked whether users could <em>understand, compare, and act</em> on the results even when relevant.</p>
+
+<p><strong>Volume-weighted clustering.</strong> Each keyword tagged with intent cluster (product discovery, order servicing, loan servicing, account actions, eligibility, complaint) and weighted by search volume. This is what surfaced the browser vs. owner split &mdash; without weighting, the two groups look similar in count; weighted, one is served and the other isn't.</p>
+
+<div class="callout">
+  The choice worth defending: why score by intent match, not by clickthrough? Because clickthrough measures whether the user pressed something, not whether they got what they came for. Owners with no relevant result often click the least-wrong option and leave frustrated. The CTR looks fine; the outcome doesn't.
+</div>
+
+<h2>The headline: the surface is optimised for one half of its users</h2>
+
+<p>Intent cluster split, volume-weighted:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Intent cluster</th>
+      <th class="num">% of volume</th>
+      <th class="num">Spot On</th>
+      <th class="num">Partial</th>
+      <th class="num">Zero</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Product discovery</td>
+      <td class="num">39.5%</td>
+      <td class="num">93%</td>
+      <td class="num">4%</td>
+      <td class="num">3%</td>
+    </tr>
+    <tr class="highlight">
+      <td>Order &amp; transaction servicing</td>
+      <td class="num">11.6%</td>
+      <td class="num">22%</td>
+      <td class="num">22%</td>
+      <td class="num"><strong>56%</strong></td>
+    </tr>
+    <tr>
+      <td>Loan &amp; EMI servicing</td>
+      <td class="num">8.3%</td>
+      <td class="num">59%</td>
+      <td class="num">41%</td>
+      <td class="num">0%</td>
+    </tr>
+    <tr>
+      <td>Account / wallet / card</td>
+      <td class="num">7.5%</td>
+      <td class="num">53%</td>
+      <td class="num">27%</td>
+      <td class="num">20%</td>
+    </tr>
+    <tr class="highlight">
+      <td>Eligibility &amp; credit score</td>
+      <td class="num">2.1%</td>
+      <td class="num">0%</td>
+      <td class="num">0%</td>
+      <td class="num"><strong>100%</strong></td>
+    </tr>
+  </tbody>
+</table>
+<p class="footnote">Keystroke fragments (28.8% of volume) excluded from scoring &mdash; they represent partial typing states, not intent.</p>
+
+<p>Two categories carry the failure.</p>
+
+<p><strong>Order &amp; transaction servicing (11.6% of volume, 56% Zero).</strong> A user types <em>my order</em> and gets a page called <em>All Stocks</em> &mdash; the stock market discovery surface. There is no place in the app called My Orders; the query fails silently. Users who type <em>cart</em> get told to check their spelling.</p>
+
+<p><strong>Eligibility &amp; credit score (2.1% of volume, 100% Zero).</strong> Small in volume, heavy in commercial intent. Every query returns nothing. Users looking for their credit score, checking whether they'll qualify, or trying to understand pre-approval get no result and no route forward.</p>
+
+<p>The pattern is not random. The categories that work map to acquisition &mdash; someone shopping, someone browsing loans, someone considering a purchase. The categories that fail map to ownership &mdash; someone trying to service what they already have.</p>
+
+<p>That's not a search problem. That's a product priority problem, made visible by search.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>Three findings from the results-usability layer</h2>
+
+<p>Layer 2 examined the pages that <em>did</em> return results. Three findings worth walking through. The full set of seven is available on request.</p>
+
+<h3>1. Advertising occupies more real estate than results</h3>
+
+<p>A persistent banner appears on virtually every search results page: <em>Payments Bank &mdash; Insure your main A/c from scams.</em> On 375&times;812, this ad occupies 30&ndash;40% of the visible screen.</p>
+
+<p>The problem isn't that the ad exists. The problem is that <strong>the ad-to-result ratio worsens as result count drops.</strong> On single-result pages &mdash; KYC, Statement, NOC, Offer, DND, Gold Loan &mdash; the ad is 2&ndash;3&times; the size of the actual result. On two-result pages, the ad roughly matches both cards combined.</p>
+
+<p>The categories with the weakest returns are also the ones where the ad dominates the viewport. The user who typed <em>NOC</em> gets one card and a promotion twice its size.</p>
+
+<p>The copy adds a second problem. The ad uses the word <em>scams</em> on a financial services platform. On a heatmap of first-glance attention, "scams" attached to a lifestyle image out-contrasts the text-heavy result cards &mdash; meaning an anxiety-triggering word catches the eye before the search result does.</p>
+
+<div class="callout">When results are sparse, advertising becomes the visual answer to the user's query.</div>
+
+<h3>2. Loan results with no way to personalise or calculate</h3>
+
+<p>When a user searches for any loan product &mdash; Personal Loan, Home Loan, Loan &mdash; the results are 2&ndash;3 cards, each showing a different loan amount, tenure, and EMI.</p>
+
+<ul>
+  <li>Card 1: <em>Insta PL &mdash; Upto &#8377;2.5L &mdash; EMI &#8377;8,666 &mdash; 36 mo</em></li>
+  <li>Card 2: <em>Pre-approved PL &mdash; Upto &#8377;1L &mdash; EMI &#8377;3,255 &mdash; 39 mo</em></li>
+  <li>Card 3: <em>Insta Salaried PL &mdash; Upto &#8377;6L &mdash; EMI &#8377;14,274 &mdash; 60 mo</em></li>
+</ul>
+
+<p>There is no calculator. No amount input. No slider. The user is expected to pick a card without knowing which product applies to them, at what amount, at what tenure.</p>
+
+<p>The user's actual question &mdash; <em>mujhe X amount chahiye, kitna EMI padega?</em> &mdash; is not answerable on this page. Instead, the page presents three pre-set product SKUs with fixed amounts that may or may not match the need.</p>
+
+<p>The insight beneath the finding: <strong>the surface is built around product logic, not user decision logic.</strong> Products come with pre-set amounts because that's how the catalog is structured. But no user thinks in the catalog's shape. Users think in the shape of their need.</p>
+
+<p>The fix is not a redesign of the results page. It is a reconception of what a loan search result <em>is</em>. The card shouldn't be a product &mdash; it should be an input surface for the user's intent, with the product derived from the input.</p>
+
+<p>That is a much larger shift than a UI change. Which is what makes it worth surfacing.</p>
+
+<h3>3. Similar-sounding products create decision paralysis</h3>
+
+<p>Related to the finding above, but distinct: <strong>the products themselves have names that make them indistinguishable to users.</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Search</th>
+      <th>Cards shown</th>
+      <th>User's question</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Personal Loan</td>
+      <td>Insta PL / Pre-approved PL / Insta Salaried PL</td>
+      <td>What's the difference between these three?</td>
+    </tr>
+    <tr>
+      <td>Laptop</td>
+      <td>Laptop on Easy EMI / Laptop on Easy EMI Loan</td>
+      <td>These are the same words. Which do I click?</td>
+    </tr>
+    <tr>
+      <td>Insurance</td>
+      <td>Car Insurance / Personal Accident / TATA AIG Car</td>
+      <td>Are these all car insurance? Why is accident here?</td>
+    </tr>
+    <tr>
+      <td>FASTag</td>
+      <td>FASTag Blacklist / [Wallet] FASTag</td>
+      <td>Is my FASTag blocked or not?</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The naming uses internal product taxonomy &mdash; <em>Insta</em>, <em>Pre-approved</em>, <em>Salaried</em> &mdash; that is meaningful to the underwriting team and meaningless to the end user. Worse, the labels contradict user intuition: <em>Insta</em> implies speed, but <em>Pre-approved</em> should logically be faster, since it's already approved.</p>
+
+<p>When a user cannot differentiate between options, three things happen. They pick randomly (poor match). They pick the safest-sounding option (often not the optimal product). Or they abandon.</p>
+
+<p>Each shows up in the funnel differently, and none of them look like a naming problem. But that's what it is.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>What happened next</h2>
+
+<p>The audit landed with the SVP. Its immediate outcome was not a shipped fix on the results page &mdash; it was structural.</p>
+
+<p>Search had, until this audit, been an unowned surface. It sat between the product teams (each of whom owned their own PDPs) and the platform team (who owned navigation). The results page was rendered by a set of merchandising rules that no PM had explicitly designed and no team was accountable for.</p>
+
+<p>The audit's finding &mdash; that half of the search volume was structurally unserved &mdash; moved search from <em>unowned surface</em> to <em>chartered product priority</em>. That was the outcome I was after. Individual findings would have surfaced test opportunities; the systemic pattern surfaced the need for ownership.</p>
+
+<p>Several findings have since been actioned. Several remain open. The larger question the audit raised &mdash; should this platform be built for browsers or owners? &mdash; is a strategy question, not a search question, and is still being worked through.</p>
+
+<h2>What I would do differently</h2>
+
+<p><strong>One:</strong> the audit relied heavily on my judgment for the Layer 1 intent-match scores. I applied a rubric, but the rubric was mine. A second rater on a subsample would have made the scoring more defensible. In practice no one has challenged it, but the discipline matters.</p>
+
+<p><strong>Two:</strong> I under-invested in Layer 2 relative to Layer 1. The seven usability findings are strong, but I could have run them past 5&ndash;8 target users in short unmoderated tests before finalising the deck. The findings would have shifted from <em>observed friction</em> to <em>validated friction</em> &mdash; a different level of evidence for a stakeholder audience. Time constraint at the time; a real gap in the method.</p>
+
+<footer class="piece">
+Full data &mdash; intent-cluster summary, per-keyword scoring across all 247 queries, and evidence for the four unmentioned findings &mdash; available on request at <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>
