@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hierarchy of Product Needs &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --accent: #1a4d7c;
+    --accent-bg: #e8f0f7;
+    --highlight: #fff8e1;
+    --tier-base: #d5e3ee;
+    --tier-mid: #7ea6c6;
+    --tier-top: #1a4d7c;
+    --tier-stroke: #1a4d7c;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul { margin: 0 0 18px; padding-left: 22px; }
+  article ul li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  /* Pyramid diagram styling */
+  .pyramid-wrap { margin: 32px 0 40px; text-align: center; }
+  .pyramid-caption { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 12px; }
+  .pyramid-svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .pyramid-svg .tier-base { fill: var(--tier-base); stroke: var(--tier-stroke); stroke-width: 1.2; }
+  .pyramid-svg .tier-mid { fill: var(--tier-mid); stroke: var(--tier-stroke); stroke-width: 1.2; }
+  .pyramid-svg .tier-top { fill: var(--tier-top); stroke: var(--tier-stroke); stroke-width: 1.2; }
+  .pyramid-svg .tier-title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: 0.06em; text-anchor: middle; fill: #111; }
+  .pyramid-svg .tier-title.on-dark { fill: #fff; }
+  .pyramid-svg .tier-sub, .pyramid-svg .tier-metric { font-family: -apple-system, 'Inter', system-ui, sans-serif; text-anchor: middle; fill: #333; }
+  .pyramid-svg .tier-sub.on-dark, .pyramid-svg .tier-metric.on-dark { fill: #fff; }
+  .pyramid-svg .leader { stroke: var(--tier-stroke); stroke-width: 1; fill: none; }
+  .pyramid-svg .external-label { font-family: -apple-system, 'Inter', system-ui, sans-serif; text-anchor: start; fill: #111; }
+  .pyramid-svg .external-label.title { font-weight: 700; letter-spacing: 0.06em; }
+  .pyramid-svg .external-label.sub { fill: #333; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">The Hierarchy of Product Needs</h1>
+<p class="subtitle">Utility, usability, experience &mdash; a Maslow-inspired hierarchy for diagnosing product problems</p>
+<p class="meta">Framework &middot; Principles</p>
+
+<p class="hook">Most product problems have a dominant failure layer. Getting the diagnosis right improves the odds of choosing the right intervention. Getting it wrong is the most common reason product teams solve the wrong problem with confidence.</p>
+
+<h2>The framework</h2>
+
+<p>The Hierarchy of Product Needs is a diagnostic model for separating three kinds of product failure: whether the product works, how much effort it takes to use, and how the interaction feels. The structure is borrowed from Maslow &mdash; three tiers, base to apex &mdash; but the framework is diagnostic, not motivational.</p>
+
+<p>Within a single interaction, higher layers depend on the lower ones. Across a longer customer relationship, that dependency becomes softer.</p>
+
+<p>This is a diagnostic hierarchy, not a delivery sequence. Teams can work on all three layers in parallel; the framework helps identify which layer is <em>primarily</em> failing so intervention is chosen against the right problem.</p>
+
+<div class="pyramid-wrap">
+<p class="pyramid-caption">The concept</p>
+<svg class="pyramid-svg" viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hierarchy of Product Needs: Utility at the base, Usability in the middle, Experience at the apex">
+  <!-- Base tier: Utility -->
+  <polygon class="tier-base" points="60,380 480,380 411,280 129,280" />
+  <text class="tier-title" x="270" y="322" font-size="18">UTILITY</text>
+  <text class="tier-sub" x="270" y="350" font-size="14">Does it work?</text>
+
+  <!-- Middle tier: Usability -->
+  <polygon class="tier-mid" points="129,280 411,280 340,160 200,160" />
+  <text class="tier-title" x="270" y="212" font-size="16">USABILITY</text>
+  <text class="tier-sub" x="270" y="240" font-size="13">Is it easy?</text>
+
+  <!-- Top tier: Experience — real pointed apex -->
+  <polygon class="tier-top" points="200,160 340,160 270,40" />
+
+  <!-- Leader line and external label for Experience -->
+  <path class="leader" d="M 320 90 L 430 90" />
+  <text class="external-label title" x="440" y="86" font-size="14">EXPERIENCE</text>
+  <text class="external-label sub" x="440" y="106" font-size="12">Does it feel right?</text>
+</svg>
+</div>
+
+<h2>What each layer means</h2>
+
+<h3>Utility &mdash; the base</h3>
+
+<p>Can the product deliver the intended job? Failures here are structural &mdash; a broken flow, an unreachable state, or a feature that promises X but delivers Y. When the search audit found that 100% of eligibility-related queries returned zero relevant results, that wasn't a usability problem. That was a utility failure. There is no point discussing whether something is "easy to use" when it doesn't work.</p>
+
+<h3>Usability &mdash; the middle</h3>
+
+<p>Given the feature works, how much friction does it take to complete? How many taps, how much thinking, how many wrong turns? Failures here are about cognitive load and interaction design &mdash; the task is completeable, but it is expensive to the user. Time-on-task rises. Drop-off climbs. Users start hunting for help. The feature functions; the effort to reach it doesn't match its value.</p>
+
+<h3>Experience &mdash; the top</h3>
+
+<p>Given it's easy, does it feel right? Does the interaction produce trust, delight, willingness to return? Failures here are emotional and relational. The user completed the task efficiently and never came back &mdash; or came back grudgingly, or completed the task and told a friend not to. The functional and the frictionless were delivered; the relationship wasn't.</p>
+
+<h2>Why the hierarchy matters &mdash; and where it isn't strict</h2>
+
+<p>The most common failure mode inside product teams is solving a top-layer problem when the base is broken. Redesigning the aesthetic of a page whose primary flow doesn't complete. Investing in NPS moves when the core task fails 40% of the time. Each of these looks like productive work. None of it fixes what's wrong.</p>
+
+<p>The hierarchy tells you where to look and in what order. It is directional. It is not absolute.</p>
+
+<div class="callout">A strong experience layer can create tolerance for usability quirks &mdash; the reason cult brands survive interaction gaps that would sink a challenger. But <em>within a single interaction</em>, the layer below has to hold. You cannot make someone feel good about a task that failed. You cannot make an unusable feature feel effortless through branding alone. The hierarchy holds within the moment. Across a relationship, higher layers can lend some patience to lower ones.</div>
+
+<p>The practical use: when a metric moves in the wrong direction, ask which layer the movement lives in <em>before</em> deciding what to change. Falling retention is not a usability problem to be solved with a new onboarding flow; it might be, but it might just as easily be an experience-layer problem masquerading as one.</p>
+
+<h2>The metrics that live at each layer</h2>
+
+<p>The hierarchy is diagnostically useful because most product metrics are ambiguous in isolation. Drop-off, satisfaction, time-on-task &mdash; each one can indicate a problem at any of the three layers depending on what the user was trying to do. The framework anchors interpretation.</p>
+
+<div class="pyramid-wrap">
+<p class="pyramid-caption">The measurement</p>
+<svg class="pyramid-svg" viewBox="0 0 620 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hierarchy of Product Needs metrics: KPIs that anchor each layer">
+  <!-- Base tier: Utility -->
+  <polygon class="tier-base" points="60,420 480,420 407,300 133,300" />
+  <text class="tier-title" x="270" y="336" font-size="17">UTILITY</text>
+  <text class="tier-metric" x="270" y="362" font-size="12">Task Success Rate &middot; Error rate</text>
+  <text class="tier-metric" x="270" y="382" font-size="12">Uptime &middot; Feature completeness</text>
+  <text class="tier-metric" x="270" y="402" font-size="12">Task coverage</text>
+
+  <!-- Middle tier: Usability -->
+  <polygon class="tier-mid" points="133,300 407,300 337,180 203,180" />
+  <text class="tier-title" x="270" y="215" font-size="15">USABILITY</text>
+  <text class="tier-metric" x="270" y="240" font-size="11">Time-on-task &middot; Drop-off</text>
+  <text class="tier-metric" x="270" y="258" font-size="11">Click depth &middot; SUS score</text>
+  <text class="tier-metric" x="270" y="276" font-size="11">Help-seeking rate</text>
+
+  <!-- Top tier: Experience — real pointed apex -->
+  <polygon class="tier-top" points="203,180 337,180 270,60" />
+
+  <!-- Leader line and external labels for Experience metrics -->
+  <path class="leader" d="M 317 105 L 430 105" />
+  <text class="external-label title" x="440" y="100" font-size="13">EXPERIENCE</text>
+  <text class="external-label sub" x="440" y="120" font-size="11">NPS &middot; CSAT</text>
+  <text class="external-label sub" x="440" y="136" font-size="11">Retention &middot; Referral</text>
+  <text class="external-label sub" x="440" y="152" font-size="11">Sentiment &middot; Affinity</text>
+</svg>
+</div>
+
+<p><strong>These aren't exclusive metrics.</strong> The same metric can point to different layers depending on the underlying behaviour. The layer tells you how to interpret the metric, not which layer the metric belongs to.</p>
+
+<h2>Where trust fits</h2>
+
+<p>Trust doesn't sit on a single tier &mdash; it runs vertically through all three. In fintech especially, this matters.</p>
+
+<p><strong>Functional trust</strong> lives at Utility. Does the platform move money correctly? Are transactions secure? Are the numbers on screen the numbers that get deducted? A single failure here can sharply damage functional trust. Users don't rate financial platforms on charm when the transfer failed.</p>
+
+<p><strong>Interaction trust</strong> lives at Usability. Does the user understand what's happening and feel in control? Was the payment initiated. Did the repayment go through. Is this fee the fee I agreed to. A financial product can be technically correct and have strong brand sentiment yet still generate uncertainty inside a single interaction &mdash; and that uncertainty is where support calls, duplicate transactions, and quiet erosion of confidence come from.</p>
+
+<p><strong>Relational trust</strong> lives at Experience. Does this brand feel like it's on my side? Are the terms fair? Would I recommend this to a family member? Relational trust is slower to build and slower to lose, but it's what determines whether a customer stays through a bad quarter, a rate change, or a policy that didn't go their way.</p>
+
+<p>All three matter, and none substitutes for the others. A platform with functional trust but no relational trust wins the transaction and loses the relationship. A platform with relational trust but no functional trust loses everything the first time something breaks. A platform with both but no interaction trust generates support load and duplicate actions one confused moment at a time.</p>
+
+<h2>The limit of the framework</h2>
+
+<p>The hierarchy is diagnostic, not prescriptive. It tells you which layer a problem lives in. It does not tell you which utility gap to prioritise, or which usability improvement will move the needle most, or which experience investment is worth the spend. Those are separate decisions, made with different tools.</p>
+
+<p>It also assumes product purpose is stable. If the fundamental job the product is doing shifts &mdash; a lending app that starts adding wealth-management features, a payment app that moves into commerce &mdash; the layers themselves have to be re-anchored against the new job. The framework doesn't do that work for you.</p>
+
+<h2>Where it shows up in my case studies</h2>
+
+<p>The <a href="pdp-disclosure.html">PDP disclosure experiment</a> sat at the boundary between usability and experience. The page worked and customers understood the information, but the information density and disclosure sequence increased cognitive effort and made the decision feel heavier than it needed to. Reframing the sequence didn't change what was said &mdash; it changed how much work the user had to do to act on it.</p>
+
+<p>The <a href="search-audit.html">search audit</a> was primarily a utility failure. In a 247-keyword audit, 100% of eligibility-related queries returned zero relevant results. No amount of usability polish could fix a search system that wasn't returning the information customers were looking for. The intervention had to start at the base.</p>
+
+<footer class="piece">
+A working framework I use daily. It doesn't solve problems &mdash; it tells you where they live. If you disagree with the trust split or the directional-not-absolute claim, I'd like to hear it. <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>

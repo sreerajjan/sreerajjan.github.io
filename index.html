@@ -3,219 +3,315 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sreeraj Janardhanan &mdash; Senior Product Manager</title>
+<title>Sreeraj Janardhanan &mdash; Product Strategy &amp; Growth</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root {
     --ink: #111;
     --ink-2: #333;
     --ink-3: #666;
-    --ink-4: #999;
-    --line: #e5e5e5;
-    --line-2: #f0f0ed;
+    --ink-4: #9a9a95;
+    --line: #e3e3de;
+    --line-2: #eeeee9;
     --bg: #fafaf7;
     --surface: #ffffff;
     --accent: #1a4d7c;
     --accent-bg: #e8f0f7;
-    --success: #2d6a3a;
-    --success-bg: #e7f2ea;
-    --warning: #8a5a13;
-    --warning-bg: #faedd5;
-    --muted-bg: #f0efec;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-  .container { max-width: 760px; margin: 0 auto; padding: 40px 24px 100px; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif;
+    font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  ::selection { background: var(--accent-bg); }
 
-  /* NAV */
-  nav.site { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 56px; flex-wrap: wrap; }
-  nav.site .brand h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
-  nav.site .brand h1 a { color: var(--ink); text-decoration: none; }
-  nav.site .brand p { margin: 2px 0 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
-  nav.site .links { display: flex; align-items: center; gap: 18px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
-  nav.site .links a { color: var(--ink-2); text-decoration: none; }
-  nav.site .links a:hover { color: var(--accent); }
-  nav.site .links a.cta { color: var(--accent); padding: 5px 12px; border: 1px solid var(--accent); border-radius: 4px; }
-  nav.site .links a.cta:hover { background: var(--accent-bg); }
+  .shell { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
-  /* HERO */
-  .hero { margin-bottom: 72px; }
-  .hero h2 { font-family: 'Charter', 'Georgia', serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.015em; margin: 0 0 20px; color: var(--ink); }
-  .hero .about { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: var(--ink-2); margin: 0; }
+  /* ---------- Layout ---------- */
+  .layout { display: grid; grid-template-columns: 268px 1fr; gap: 0 72px; align-items: start; }
 
-  /* SECTIONS */
-  .section { margin-bottom: 56px; }
-  .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
-  .section-head h3 { font-family: 'Charter', 'Georgia', serif; font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.01em; color: var(--ink); }
-  .section-head .count { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--ink-4); }
-  .section-note { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); font-style: italic; margin: -12px 0 20px; }
+  /* ---------- Rail ---------- */
+  .rail { position: sticky; top: 0; padding: 76px 0 40px; }
+  .rail .name {
+    font-family: 'Charter', 'Georgia', serif;
+    font-size: 38px; line-height: 1.05; font-weight: 400;
+    letter-spacing: -0.015em; margin: 0 0 18px; color: var(--ink);
+  }
+  .rail .name span { display: block; }
+  .rail .rule { width: 44px; height: 2px; background: var(--accent); margin: 0 0 18px; }
+  .rail .positioning {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 13px; line-height: 1.6; color: var(--ink-3);
+    margin: 0 0 20px; letter-spacing: 0.01em;
+  }
+  .rail .lede { font-size: 16px; line-height: 1.55; color: var(--ink-2); margin: 0 0 26px; }
 
-  /* CARDS */
-  .card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
-  .card:hover { border-color: var(--accent); }
-  .card:hover .card-title { color: var(--accent); }
-  .card.flagship { padding: 24px 26px; }
-  .card-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
-  .pill { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.02em; }
-  .pill.flagship { background: var(--accent-bg); color: var(--accent); }
-  .pill.live { background: var(--success-bg); color: var(--success); }
-  .pill.draft { background: var(--warning-bg); color: var(--warning); }
-  .pill.coming { background: var(--muted-bg); color: var(--ink-3); }
-  .meta-text { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--ink-3); }
-  .card-title { font-family: 'Charter', 'Georgia', serif; font-size: 21px; font-weight: 700; line-height: 1.3; margin: 0 0 6px; color: var(--ink); letter-spacing: -0.01em; transition: color 0.15s; }
-  .card.flagship .card-title { font-size: 24px; }
-  .card-desc { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); margin: 0; line-height: 1.6; }
+  .rail-links { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13.5px; margin: 0 0 30px; }
+  .rail-links a {
+    display: block; text-decoration: none; color: var(--ink-2);
+    padding: 7px 0; border-bottom: 1px solid var(--line-2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .rail-links a:first-child { border-top: 1px solid var(--line-2); }
+  .rail-links a:hover { color: var(--accent); }
+  .rail-links a:hover .arw { transform: translateX(3px); opacity: 1; }
+  .rail-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .rail-links .arw { color: var(--ink-4); opacity: 0.65; transition: transform .15s ease, opacity .15s ease; font-size: 12px; }
 
-  /* PRINCIPLES GRID */
-  .principles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .principle-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; text-decoration: none; color: inherit; transition: border-color 0.15s; }
-  .principle-card:hover { border-color: var(--accent); }
-  .principle-card:hover .principle-name { color: var(--accent); }
-  .principle-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; color: var(--accent); font-family: 'Charter', 'Georgia', serif; font-size: 16px; font-weight: 700; }
-  .principle-name { font-family: 'Charter', 'Georgia', serif; font-size: 17px; font-weight: 700; margin: 0 0 4px; color: var(--ink); transition: color 0.15s; }
-  .principle-desc { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.55; }
+  .stats { font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+  .stats .row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; }
+  .stats .n { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.015em; min-width: 76px; }
+  .stats .l { font-size: 11.5px; color: var(--ink-3); line-height: 1.35; }
 
-  /* FOOTER */
-  footer.site { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
-  footer.site a { color: var(--ink-2); text-decoration: none; margin-left: 18px; }
-  footer.site a:first-child { margin-left: 0; }
-  footer.site a:hover { color: var(--accent); }
+  /* ---------- Main ---------- */
+  main { padding: 76px 0 90px; min-width: 0; }
 
+  section + section { margin-top: 68px; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+  .sec-head h2 {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.13em;
+    text-transform: uppercase; color: var(--accent); margin: 0;
+  }
+  .sec-head .count { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--ink-4); }
+  .sec-rule { height: 1px; background: var(--ink); opacity: 0.85; margin: 0 0 4px; }
+  .sec-note { font-size: 16px; color: var(--ink-3); margin: 16px 0 0; line-height: 1.55; }
+
+  /* Entries */
+  .entry {
+    display: grid; grid-template-columns: 40px 1fr; gap: 0 16px;
+    padding: 26px 16px 26px 0; border-bottom: 1px solid var(--line-2);
+    text-decoration: none; position: relative;
+    transition: background .16s ease, padding .16s ease;
+  }
+  .entry::before {
+    content: ""; position: absolute; left: -16px; top: 0; bottom: 0; width: 2px;
+    background: var(--accent); opacity: 0; transition: opacity .16s ease;
+  }
+  .entry:hover { background: var(--surface); }
+  .entry:hover::before { opacity: 1; }
+  .entry:hover .e-title { color: var(--accent); }
+  .entry:hover .e-num { color: var(--accent); }
+  .entry:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .e-num {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 12px; font-weight: 600; color: var(--ink-4);
+    padding-top: 7px; letter-spacing: 0.05em; transition: color .16s ease;
+  }
+  .e-title {
+    display: block; font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 21px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.28;
+    color: var(--ink); margin: 0 0 7px; transition: color .16s ease;
+  }
+  .e-desc { font-size: 16.5px; color: var(--ink-2); margin: 0 0 11px; line-height: 1.52; }
+  .e-meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12.5px; color: var(--ink-3); margin: 0; }
+  .e-meta b { font-weight: 600; color: var(--ink-2); }
+
+  /* Framework entries */
+  .fw {
+    display: grid; grid-template-columns: 40px 1fr; gap: 0 16px;
+    padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line-2);
+    text-decoration: none; position: relative; transition: background .16s ease;
+  }
+  .fw::before {
+    content: ""; position: absolute; left: -16px; top: 0; bottom: 0; width: 2px;
+    background: var(--accent); opacity: 0; transition: opacity .16s ease;
+  }
+  .fw:hover { background: var(--surface); }
+  .fw:hover::before { opacity: 1; }
+  .fw:hover .fw-title { color: var(--accent); }
+  .fw:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .fw-step { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; color: var(--ink-4); padding-top: 5px; }
+  .fw-title { display: block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 4px; transition: color .16s ease; }
+  .fw-desc { font-size: 15.5px; color: var(--ink-3); margin: 0; line-height: 1.5; }
+  .fw-desc b { color: var(--ink-2); font-weight: 600; }
+
+  /* About */
+  .about p { margin: 18px 0 0; max-width: 42em; }
+  .interests {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 13px; color: var(--ink-3); margin-top: 26px;
+    padding: 14px 18px; background: var(--accent-bg); border-radius: 4px;
+  }
+  .interests b { color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+
+  footer.site {
+    margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
+    font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px;
+    color: var(--ink-3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  footer.site .links a { margin-left: 18px; }
+  footer.site .links a:first-child { margin-left: 0; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; gap: 0; }
+    .rail { position: static; padding: 52px 0 0; border-bottom: 1px solid var(--line); padding-bottom: 32px; }
+    .rail .name { font-size: 34px; }
+    .rail .name span { display: inline; }
+    .rail .lede { max-width: 34em; font-size: 17px; }
+    .rail-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-bottom: 24px; }
+    .rail-links a { border: none; padding: 4px 0; }
+    .rail-links a:first-child { border-top: none; }
+    .rail-links a { border-bottom: 1px solid var(--line); }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    main { padding-top: 44px; }
+  }
   @media (max-width: 640px) {
-    .container { padding: 32px 20px 80px; }
-    .hero h2 { font-size: 26px; }
-    .section-head h3 { font-size: 22px; }
-    .card-title { font-size: 18px; }
-    .card.flagship .card-title { font-size: 20px; }
+    .shell { padding: 0 20px; }
     body { font-size: 17px; }
-    nav.site { gap: 12px; }
-    nav.site .links { gap: 14px; font-size: 12px; }
+    .rail .name { font-size: 29px; }
+    .e-title { font-size: 19px; }
+    .e-desc { font-size: 16px; }
+    .entry, .fw { grid-template-columns: 28px 1fr; gap: 0 12px; padding-right: 0; }
+    .entry::before, .fw::before { left: -12px; }
+    .stats { grid-template-columns: 1fr; }
+    footer.site { flex-direction: column; gap: 12px; }
+    footer.site .links a { margin-left: 0; margin-right: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
   }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="shell">
+<div class="layout">
 
-<nav class="site">
-  <div class="brand">
-    <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
-    <p>Senior product manager &middot; Consumer and fintech</p>
-  </div>
-  <div class="links">
-    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="mailto:sreerajjan18@gmail.com">Email</a>
-    <a href="Sreeraj_Janardhanan_Resume.pdf" class="cta" target="_blank" rel="noopener">Resume</a>
-  </div>
-</nav>
+  <aside class="rail">
+    <h1 class="name"><span>Sreeraj</span><span>Janardhanan</span></h1>
+    <div class="rule"></div>
+    <p class="positioning">Product Strategy &amp; Growth &middot; Consumer Fintech &middot; 0&rarr;1</p>
+    <p class="lede">I turn behavioural insight, experimentation and data into product bets that improve customer journeys and move business outcomes.</p>
 
-<section class="hero">
-  <h2>Most of what I&rsquo;ve shipped that worked broke a best practice first.</h2>
-  <p class="about">Nine years across fintech and automotive. Currently owning consumer decisions on a 20M+ MAU lending platform. This site is a growing library of the bets, the frameworks behind them, and what happened when they met real users.</p>
-</section>
+    <nav class="rail-links">
+      <a href="#work">Selected work <span class="arw">&darr;</span></a>
+      <a href="Sreeraj_Janardhanan_Resume.pdf">Resume <span class="arw">&#8599;</span></a>
+      <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn <span class="arw">&#8599;</span></a>
+      <a href="mailto:sreerajjan18@gmail.com">Email <span class="arw">&#8599;</span></a>
+    </nav>
 
-<section class="section">
-  <div class="section-head">
-    <h3>Work</h3>
-    <span class="count">3 case studies</span>
-  </div>
-
-  <a class="card flagship" href="pdp-disclosure.html">
-    <div class="card-meta">
-      <span class="pill flagship">Flagship</span>
-      <span class="meta-text">Framing effect &middot; 6 min read</span>
+    <div class="stats">
+      <div class="row"><span class="n">9 years</span><span class="l">Product &amp; strategy</span></div>
+      <div class="row"><span class="n">20M+</span><span class="l">MAU consumer platforms</span></div>
+      <div class="row"><span class="n">15+</span><span class="l">Lending &amp; financial journeys</span></div>
+      <div class="row"><span class="n">&#8377;1,500 Cr</span><span class="l">Incremental annual revenue</span></div>
     </div>
-    <p class="card-title">Why we made a lending PDP less transparent &mdash; and TSR jumped 15 points</p>
-    <p class="card-desc">Best-practice UX said full transparency. Conversion stalled. We reframed the PDP from a disclosure surface to an engagement surface &mdash; and let engagement earn the right to a fuller conversation.</p>
-  </a>
+  </aside>
 
-  <a class="card" href="search-audit.html">
-    <div class="card-meta">
-      <span class="pill live">Live</span>
-      <span class="meta-text">Worn path &middot; 8 min read</span>
-    </div>
-    <p class="card-title">When search works for browsers but fails for owners</p>
-    <p class="card-desc">A 247-keyword audit of an Indian NBFC&rsquo;s search surface &mdash; and why half the platform&rsquo;s users were structurally underserved.</p>
-  </a>
+  <main>
 
-  <a class="card" href="meridian.html">
-    <div class="card-meta">
-      <span class="pill draft">Draft</span>
-      <span class="meta-text">Four-lens triangulation &middot; 7 min read</span>
-    </div>
-    <p class="card-title">Meridian: an intelligence layer for a 20M-user platform</p>
-    <p class="card-desc">Building AI-native product inside a large NBFC &mdash; capture cards, tag stacks, and self-routing across loan products.</p>
-  </a>
-</section>
+    <section id="work">
+      <div class="sec-head"><h2>Selected work</h2><span class="count">3 case studies</span></div>
+      <div class="sec-rule"></div>
 
-<section class="section">
-  <div class="section-head">
-    <h3>Principles</h3>
-    <span class="count">3 frameworks</span>
-  </div>
-  <p class="section-note">Ideas I keep coming back to. Each shows up across the case studies above.</p>
+      <a class="entry" href="pdp-disclosure.html">
+        <span class="e-num">01</span>
+        <span>
+          <span class="e-title">When transparency became friction</span>
+          <p class="e-desc">Best-practice UX said full disclosure. Conversion stalled. We reframed a Business Loan page from a disclosure surface into an engagement surface &mdash; and got Legal to sign it off before the first test went live.</p>
+          <p class="e-meta">Business Loan PDP &middot; <b>+15pp application starts</b> &middot; +14% end-to-end conversion &middot; 6 min</p>
+        </span>
+      </a>
 
-  <div class="principles-grid">
-    <a class="principle-card" href="worn-path.html">
-      <div class="principle-icon">WP</div>
-      <p class="principle-name">Worn path</p>
-      <p class="principle-desc">Where users actually go vs. where the product assumes they will.</p>
-    </a>
+      <a class="entry" href="rmdv2.html">
+        <span class="e-num">02</span>
+        <span>
+          <span class="e-title">The JLR playbook wasn't enough</span>
+          <p class="e-desc">A 0&rarr;1 requirements platform at Tata Motors, rebuilt around an engineering culture the reference model didn't account for. Half the product I shipped had nothing to copy from.</p>
+          <p class="e-meta">RMDV2 &middot; <b>~50 vehicle programmes at exit, ~300 today</b> &middot; 2017&ndash;2021 &middot; 9 min</p>
+        </span>
+      </a>
 
-    <a class="principle-card" href="uue-pillars.html">
-      <div class="principle-icon">UUE</div>
-      <p class="principle-name">UUE pillars</p>
-      <p class="principle-desc">Utility, usability, experience &mdash; three lenses on why a screen isn&rsquo;t converting.</p>
-    </a>
+      <a class="entry" href="search-audit.html">
+        <span class="e-num">03</span>
+        <span>
+          <span class="e-title">When search works for browsers but fails for owners</span>
+          <p class="e-desc">An audit of an Indian NBFC's search surface, and why half the platform's users were structurally underserved. The outcome wasn't a fix &mdash; it was ownership of a surface nobody owned.</p>
+          <p class="e-meta">Search audit &middot; <b>247 keywords &middot; 1.87M sessions</b> &middot; 8 min</p>
+        </span>
+      </a>
+    </section>
 
-    <a class="principle-card" href="four-lens.html">
-      <div class="principle-icon">4L</div>
-      <p class="principle-name">Four-lens triangulation</p>
-      <p class="principle-desc">Cross-checking a hypothesis through behaviour, voice, journey, and outcome.</p>
-    </a>
-  </div>
-</section>
+    <section id="thinking">
+      <div class="sec-head"><h2>How I think</h2><span class="count">3 frameworks</span></div>
+      <div class="sec-rule"></div>
+      <p class="sec-note">Three frameworks that run in sequence, upstream to downstream. Each one shows up in the case studies above.</p>
 
-<section class="section">
-  <div class="section-head">
-    <h3>Teardowns</h3>
-    <span class="count">1 in progress</span>
-  </div>
+      <a class="fw" href="three-lens.html">
+        <span class="fw-step">01</span>
+        <span>
+          <span class="fw-title">Three-lens triangulation</span>
+          <p class="fw-desc"><b>Find the tension.</b> Business, industry and consumer evidence, held open until one domain contradicts another.</p>
+        </span>
+      </a>
 
-  <a class="card" href="nykaa-teardown.html">
-    <div class="card-meta">
-      <span class="pill coming">Coming</span>
-      <span class="meta-text">5 min read</span>
-    </div>
-    <p class="card-title">What Nykaa&rsquo;s search reveals about how beauty shoppers actually decide</p>
-    <p class="card-desc">Discovery, filtering, and the difference between browsing and buying on a category-heavy catalogue.</p>
-  </a>
-</section>
+      <a class="fw" href="worn-path.html">
+        <span class="fw-step">02</span>
+        <span>
+          <span class="fw-title">The Worn Path</span>
+          <p class="fw-desc"><b>Find the behavioural marker.</b> Where users actually go versus where the product assumed they would.</p>
+        </span>
+      </a>
 
-<section class="section">
-  <div class="section-head">
-    <h3>Writing</h3>
-    <span class="count">1 essay</span>
-  </div>
+      <a class="fw" href="hierarchy-of-product-needs.html">
+        <span class="fw-step">03</span>
+        <span>
+          <span class="fw-title">The Hierarchy of Product Needs</span>
+          <p class="fw-desc"><b>Diagnose the layer.</b> Utility, usability, experience &mdash; and which one is actually failing.</p>
+        </span>
+      </a>
+    </section>
 
-  <a class="card" href="discover-weekly.html">
-    <div class="card-meta">
-      <span class="pill live">Live</span>
-      <span class="meta-text">4 min read</span>
-    </div>
-    <p class="card-title">Your listening data is lying about you</p>
-    <p class="card-desc">How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead.</p>
-  </a>
-</section>
+    <section id="writing">
+      <div class="sec-head"><h2>Writing</h2><span class="count">2 essays</span></div>
+      <div class="sec-rule"></div>
 
-<footer class="site">
-  <p>&copy; 2026 Sreeraj Janardhanan</p>
-  <div>
-    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="mailto:sreerajjan18@gmail.com">Email</a>
-    <a href="Sreeraj_Janardhanan_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-  </div>
-</footer>
+      <a class="entry" href="share-shift-market-make.html">
+        <span class="e-num">01</span>
+        <span>
+          <span class="e-title">Share-shifting vs. market-making</span>
+          <p class="e-desc">Two postures for entering a mature category, and why incumbents almost always pick the wrong one. Zerodha, Groww, and the 87% of India's household gold that has never seen a formal lender.</p>
+          <p class="e-meta">Essay &middot; 8 min</p>
+        </span>
+      </a>
 
+      <a class="entry" href="discover-weekly.html">
+        <span class="e-num">02</span>
+        <span>
+          <span class="e-title">Your listening data is lying about you</span>
+          <p class="e-desc">How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead.</p>
+          <p class="e-meta">Essay &middot; 4 min</p>
+        </span>
+      </a>
+    </section>
+
+    <section id="about" class="about">
+      <div class="sec-head"><h2>About</h2></div>
+      <div class="sec-rule"></div>
+      <p>Nine years across consumer fintech and automotive. I currently work on product strategy and new ventures at a large Indian non-bank lender, across seven business tracks spanning lending, payments and wealth management &mdash; mostly the 0&rarr;1 end, where the problem hasn't been framed yet.</p>
+      <p>Before that I owned lending and credit journeys on a 20M+ MAU platform, and before that I built a requirements-management platform at Tata Motors. The through-line is behavioural research and experimentation used to find bets rather than to justify them. Some of my current work isn't public; happy to talk through it.</p>
+      <p class="interests"><b>CURRENTLY INTERESTED IN</b> &nbsp;&middot;&nbsp; Consumer fintech &nbsp;&middot;&nbsp; Growth &nbsp;&middot;&nbsp; 0&rarr;1 &nbsp;&middot;&nbsp; AI-enabled products</p>
+    </section>
+
+    <footer class="site">
+      <span>&copy; 2026 Sreeraj Janardhanan</span>
+      <span class="links">
+        <a href="mailto:sreerajjan18@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="Sreeraj_Janardhanan_Resume.pdf">Resume</a>
+      </span>
+    </footer>
+
+  </main>
+</div>
 </div>
 </body>
 </html>

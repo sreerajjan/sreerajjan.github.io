@@ -3,17 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Worn Path &mdash; Sreeraj Janardhanan</title>
+<title>The Worn Path &mdash; Sreeraj Janardhanan</title>
 <meta name="robots" content="noindex, nofollow">
 <style>
   :root {
-    --ink: #111; --ink-2: #333; --ink-3: #666; --ink-4: #999;
-    --line: #e5e5e5; --line-2: #f0f0ed; --bg: #fafaf7;
-    --accent: #1a4d7c; --highlight: #fff8e1;
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --accent: #1a4d7c;
+    --accent-bg: #e8f0f7;
+    --highlight: #fff8e1;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
   .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
   header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
   header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
   header.site h1 a { color: var(--ink); text-decoration: none; }
@@ -21,26 +30,72 @@
   header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
   header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
   header.site nav a:hover { border-bottom-color: var(--accent); }
+
   .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
   .back-link:hover { color: var(--accent); }
-  .back-link::before { content: "\2190  "; }
-  .stub { text-align: left; padding: 40px 0; }
-  .stub .stub-label { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-3); margin: 0 0 20px; }
-  .stub h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 32px; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 20px; }
-  .stub .teaser { font-size: 19px; line-height: 1.6; color: var(--ink-2); margin: 0 0 24px; }
-  .stub .status { background: var(--highlight); padding: 18px 22px; border-radius: 4px; font-size: 15px; margin: 32px 0; }
-  .stub .status strong { display: block; margin-bottom: 4px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul, article ol { margin: 0 0 18px; padding-left: 22px; }
+  article ul li, article ol li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  /* Image */
+  .image-wrap { margin: 32px 0 40px; text-align: center; }
+  .image-wrap img { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 6px; }
+  .image-caption { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--ink-3); margin: 12px auto 0; font-style: italic; max-width: 500px; line-height: 1.5; }
+
+  /* Technique blocks */
+  .technique { margin: 0 0 22px; padding: 0; }
+  .technique .name { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+  .technique .body { margin: 0 0 4px; }
+  .technique .body strong { font-weight: 600; color: var(--ink-2); }
+
+  /* Decision chain */
+  .decision-chain { margin: 24px auto 32px; max-width: 460px; font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+  .decision-chain .step { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 20px; text-align: center; font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .decision-chain .step:first-child { border-color: var(--accent); background: var(--accent-bg); }
+  .decision-chain .step:last-child { border-color: var(--accent); background: var(--accent-bg); }
+  .decision-chain .arrow { text-align: center; font-size: 18px; color: var(--ink-4); margin: 6px 0; line-height: 1; }
+
+  /* Tactical vs systemic block */
+  .tactical-vs-systemic { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+  .tactical-vs-systemic .col { padding: 18px 22px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+  .tactical-vs-systemic .col-label { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3); font-weight: 700; margin: 0 0 10px; }
+  .tactical-vs-systemic .col-body { font-size: 15px; font-weight: 500; color: var(--ink); margin: 0 0 10px; line-height: 1.45; }
+  .tactical-vs-systemic .col-note { font-size: 13px; color: var(--ink-3); margin: 0; line-height: 1.5; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
   footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
   footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
   footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-  @media (max-width: 640px) { .container { padding: 40px 20px 80px; } .stub h1 { font-size: 26px; } body { font-size: 17px; } }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+    .tactical-vs-systemic { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
 <header class="site">
   <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
-  <p>Senior product manager &middot; Consumer and fintech</p>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
   <nav>
     <a href="index.html">Home</a>
     <a href="mailto:sreerajjan18@gmail.com">Email</a>
@@ -50,21 +105,144 @@
 
 <a class="back-link" href="index.html">Back to home</a>
 
-<section class="stub">
-  <p class="stub-label">Principle &middot; In progress</p>
-  <h1>Worn Path</h1>
-  <p class="teaser">Users don&rsquo;t follow the path a product designer imagined. They follow the path that&rsquo;s already been walked &mdash; by their own habits, by the platform&rsquo;s dominant grammar, by the muscle memory of every other app they use in a day. The Worn Path is the gap between the intended journey and the one that actually gets used.</p>
-  <p class="teaser">Most funnel drops aren&rsquo;t a design failure. They&rsquo;re the product asking users to walk somewhere no one has walked before, on a page where the worn path leads elsewhere. The principle: find the worn path first, then decide whether to pave it or redirect it. Fighting it silently is the most expensive option.</p>
-  <p class="teaser">This principle shows up in the search audit case study &mdash; where owner-intent users kept walking a browser&rsquo;s path because the product had no separate one for them &mdash; and in several teardowns to come.</p>
+<article>
 
-  <div class="status">
-    <strong>Status</strong>
-    Full write-up being drafted, with the original LinkedIn post as the seed. <a href="mailto:sreerajjan18@gmail.com" style="color: var(--accent);">Email me</a> to be notified when it&rsquo;s live.
+<h1 class="title">The Worn Path</h1>
+<p class="subtitle">Finding product opportunity in the gap between designed and observed journeys</p>
+<p class="meta">Framework</p>
+
+<p class="hook">Every product ships with an implicit assumption about how users will move through it. Real users routinely deviate from those assumptions, often in ways product teams don't notice until the divergence becomes significant. The gap between the designed workflow and the actual behaviour is where product opportunity lives.</p>
+
+<h2>What the framework is</h2>
+
+<p>Named after <em>desire paths</em> &mdash; the dirt tracks people wear across grass instead of using the paved walkway. In physical design it's an old idea. Some design schools now deliberately lay grass first, wait a few months, and pave over the tracks people choose &mdash; the theory being that users often reveal routes designers didn't anticipate.</p>
+
+<p>The Worn Path framework applies the same principle to digital products. Users write their own routes through your product. Those routes are visible in behavioural data if you look for them. Finding them, and understanding why they exist, is a generative act &mdash; it often produces the strongest product opportunities.</p>
+
+<div class="image-wrap">
+<img src="wornpath.webp" alt="A dirt path worn diagonally across grass beside a paved walkway. The dirt path is labelled 'User experience'; the paved walkway is labelled 'Design'." />
+<p class="image-caption">A desire path in the wild. The label pair &mdash; user experience on the dirt track, design on the paved walkway &mdash; makes the product point instantly.</p>
+</div>
+
+<h2>What qualifies as a worn path</h2>
+
+<p>A genuine worn path has three characteristics: it's <strong>repeated across a meaningful population</strong>, it <strong>persists over time</strong>, and it <strong>points to a structural gap in the designed journey</strong>. One user's shortcut is an anecdote. A pattern that meets all three is a signal.</p>
+
+<h2>Why they matter</h2>
+
+<p><strong>Behaviour is often the stronger signal of current constraints.</strong> Stated preferences (in surveys, in interviews) reflect what users think they want, or what they think they should say. Observed behaviour reflects what they actually do under current constraints. Both need interpreting &mdash; but when the two diverge, behaviour is usually the more honest signal of the constraint the user is trying to work around.</p>
+
+<p><strong>Worn paths reveal structural gaps, not situational ones.</strong> A worn path usually exists because the designed path doesn't fully serve the job users are trying to accomplish. It's not one user's mistake &mdash; it's a pattern across many users, pointing to a gap in the design rather than in the users' behaviour.</p>
+
+<p><strong>The fix generalises.</strong> When you understand why users take the worn path, you can either pave it (build the workaround into the product) or remove the reason it existed (fix the design gap that forced the workaround). Both are more valuable than making the paved path prettier.</p>
+
+<h2>How you find them</h2>
+
+<p>Worn paths don't announce themselves. They show up as anomalies in behavioural data. Four analytical techniques do most of the detection.</p>
+
+<div class="technique">
+  <p class="name">1. Event-sequence analysis with a time window</p>
+  <p class="body"><strong>What it does:</strong> examines what users do immediately before and after a key event, within a defined time window.</p>
+  <p class="body"><strong>When it's useful:</strong> when a behaviour appears to be triggered upstream or resolved downstream in ways the product didn't design for.</p>
+</div>
+
+<div class="technique">
+  <p class="name">2. Co-occurrence and association analysis</p>
+  <p class="body"><strong>What it does:</strong> looks for pairs or clusters of behaviours that happen together more often than random.</p>
+  <p class="body"><strong>When it's useful:</strong> identifying which existing behaviours are actually part of the same underlying job, even if the product treats them as separate.</p>
+</div>
+
+<div class="technique">
+  <p class="name">3. Behavioural segmentation by path</p>
+  <p class="body"><strong>What it does:</strong> clusters users by the actual sequence of steps they take, then identifies populations whose behaviour concentrates in specific segments.</p>
+  <p class="body"><strong>When it's useful:</strong> when a signal seems weak in aggregate but strong in a subset &mdash; the "3% of users do X" pattern that turns out to be "43% of a specific cohort do X."</p>
+</div>
+
+<div class="technique">
+  <p class="name">4. Statistical validation</p>
+  <p class="body"><strong>What it does:</strong> tests whether a behavioural pattern is likely to be meaningful rather than random &mdash; chi-square, lift tests, or significance checks against a control cohort. The specific tool matters less than the discipline of running one.</p>
+  <p class="body"><strong>When it's useful:</strong> when the pattern needs to withstand skeptical questioning, or when the intervention it implies is expensive.</p>
+</div>
+
+<h2>The decision rule</h2>
+
+<p>When a repeated, high-intent workaround appears in a meaningful cohort, investigate the underlying job before optimising the existing screen. Prioritise the systemic fix when the same unmet need leaks into multiple channels or journeys.</p>
+
+<div class="decision-chain">
+  <div class="step">Observed workaround</div>
+  <div class="arrow">&darr;</div>
+  <div class="step">Validate cohort and persistence</div>
+  <div class="arrow">&darr;</div>
+  <div class="step">Research the underlying job</div>
+  <div class="arrow">&darr;</div>
+  <div class="step">Quantify cross-channel impact</div>
+  <div class="arrow">&darr;</div>
+  <div class="step">Choose tactical fix or systemic investment</div>
+</div>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>A worked example</h2>
+
+<p>At a large Indian non-bank lender, a small anomaly turned into a strategic recommendation.</p>
+
+<p><strong>The pattern.</strong> Around 5% of customers who downloaded their Statement of Account went to in-app search within two minutes and typed variations of <em>"kisht kitna hai"</em> &mdash; Hindi for <em>"how much is my installment?"</em> The installment amount was already on the statement they had just downloaded, in English.</p>
+
+<p><strong>The technique.</strong> Event-sequence analysis with a two-minute time window on the SoA-download event, cross-referenced against subsequent search-term patterns. Behavioural segmentation by navigation flow revealed that the anomaly concentrated sharply in the flows where the vernacular-language toggle wasn't easily available.</p>
+
+<p><strong>The interpretation.</strong> Users wanted their installment amount in a language they could parse. The Statement of Account displayed it in English. When customers couldn't find the vernacular toggle in the flow they were already in, they fell back to in-app search &mdash; typing the question in Hindi. Search was the visible workaround for a design gap that existed elsewhere.</p>
+
+<p><strong>The cross-channel escalation.</strong> This was the more important move. Search was one leak. The same underlying problem &mdash; customers unable to answer a basic loan question in the language they think in &mdash; was also leaking into support tickets, chat conversations, and branch walk-ins. We didn't see those channels in the search data. Fixing only the vernacular toggle would close one visible leak while leaving the structural gap.</p>
+
+<div class="tactical-vs-systemic">
+  <div class="col">
+    <p class="col-label">TACTICAL FIX</p>
+    <p class="col-body">Standardise the vernacular toggle across all navigation flows.</p>
+    <p class="col-note">Shipped in a week. Closed the specific leak; the search pattern faded from ~5% to under 1% and stayed under control on monthly service-health reviews.</p>
   </div>
-</section>
+  <div class="col">
+    <p class="col-label">SYSTEMIC OPPORTUNITY</p>
+    <p class="col-body">Make self-service understandable in the customer's language across the platform.</p>
+    <p class="col-note">Shaped a roadmap. Accelerated vernacular support across surfaces and prompted investment in real-time assistance for exactly these self-help moments.</p>
+  </div>
+</div>
+
+<p>The specific search behaviour declined sharply after the fix. Any broader cost-to-serve impact wasn't isolated cleanly enough to attribute causally. The strategic vernacular investment that followed was where the material downstream impact would land, on a longer horizon than a single ship.</p>
+
+<div class="callout">
+The marker you can see is almost always one visible instance of a wider structural gap. If you fix only the marker, you close one leak and leave the gap. The senior version of worn-path work isn't finding the pattern &mdash; it's using the pattern to argue for the systemic fix.
+</div>
+
+<h2>How this differs from the Hierarchy of Product Needs</h2>
+
+<p>The two frameworks answer different questions.</p>
+
+<p><strong>The <a href="hierarchy-of-product-needs.html">Hierarchy</a> is diagnostic.</strong> Something has already gone wrong; you're trying to figure out which layer (utility, usability, experience) the failure lives in, so intervention is chosen against the right problem.</p>
+
+<p><strong>The Worn Path is generative.</strong> Nothing may be visibly "wrong" &mdash; the product may be functioning as designed. You're looking for the gap between designed workflow and actual behaviour to find what the product <em>could be</em> doing that it isn't.</p>
+
+<p>On a real product problem, you often use them in sequence: worn-path analysis to identify what's happening, hierarchy analysis to diagnose the layer at which the intervention should live.</p>
+
+<h2>The limits</h2>
+
+<p>The worn path only tells you <em>what</em> users are doing, not <em>why</em>. A pattern in the data is a hypothesis, not an answer. You still need qualitative work &mdash; interviews, observation, session recordings &mdash; to understand the reason behind the behaviour. Skipping that step is how teams ship confident fixes for problems they misunderstood.</p>
+
+<p>Also: not every anomaly is a worn path. Some are edge cases. Some are bugs. Some are one power user doing something weird that shouldn't inform the product for the other 99%. Distinguishing a genuine pattern (many users, persistent behaviour, structural cause) from noise (few users, transient, situational) is judgment work that no technique substitutes for.</p>
+
+<h2>Where it shows up in my case studies</h2>
+
+<p>The <a href="search-audit.html">search audit</a> is a worn-path finding at platform level. The 247-keyword audit revealed the paved path (the search bar) was serving one half of the user base well (product discovery) and structurally underserving the other half (order and account servicing). The pattern was in the data; the framework named what it meant.</p>
+
+<p>The <a href="pdp-disclosure.html">PDP disclosure experiment</a> used a worn-path finding as its origin. The CIBIL cross-reference revealed that drop-offs weren't giving up on borrowing &mdash; they were borrowing elsewhere. The paved path assumed drop-off meant disinterest. The worn path was: interested customer, cognitive overload, competitor's simpler flow. Reframing the page was the response.</p>
+
+<footer class="piece">
+A framework I use before opening the design tool. What users are already doing is often the strongest brief for what the product should do next. <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
 
 <footer class="site">
-  <p>&copy; 2026 Sreeraj Janardhanan &middot; <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> &middot; <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
 </footer>
 </div>
 </body>

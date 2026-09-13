@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why we made a lending page less transparent &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --accent: #1a4d7c;
+    --highlight: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul { margin: 0 0 18px; padding-left: 22px; }
+  article ul li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); background: transparent; border-bottom: 2px solid var(--ink); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.highlight td { background: #fff5f0; }
+  tr.highlight td strong { color: #b8480e; }
+
+  .footnote { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); font-style: italic; margin-top: -12px; margin-bottom: 24px; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+    table { font-size: 13px; }
+    th, td { padding: 8px 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">Why we made a lending page less transparent &mdash; and applications jumped 15 points</h1>
+<p class="subtitle">A Business Loan discovery surface at a major Indian non-bank lender</p>
+<p class="meta">March 2025 &middot; App + web &middot; Case study</p>
+
+<p class="hook">Half the users who dropped off our Business Loan page borrowed from a competitor within 30 days. They weren't undecided browsers. They were in-market credit demand, and we were losing them before we had earned a conversation.</p>
+
+<h2>The finding that reframed the problem</h2>
+
+<p>We had iterated the Business Loan page three times on the assumption that the problem was comprehension. Too wordy. Too many charges. Fee logic too complex for a first-time borrower. Each iteration made the page cleaner. None moved conversion.</p>
+
+<p>The break came from an unrelated question. If these drop-offs weren't converting with us, were they borrowing at all &mdash; or were they simply not-in-market?</p>
+
+<p>We ran the drop-off cohort against CIBIL bureau enquiries and disbursals for the following 30 days. A meaningful share had borrowed. From competitors. Some at effective rates higher than we would have offered them.</p>
+
+<p>That result changed the question. It was no longer <em>how do we make this page easier to understand.</em> It was <em>how do we keep an in-market borrower engaged long enough to enter a conversation with us.</em></p>
+
+<h2>Why this matters</h2>
+
+<p>Business Loan is one of the higher-revenue-per-loan products on the platform &mdash; average ticket ~&#8377;12&ndash;15 lakh, tenure typically 24&ndash;48 months. Every drop-off is not a rounding error; each one represents a customer whose intent has already been captured and is now being squandered. And Business Loan sits in a segment where the customer base is small, targeted, and heavily contested. The next lender is one Google search away.</p>
+
+<p>The economics compound the problem. A digitally-acquired Business Loan customer costs roughly 40% of an assisted-acquired one &mdash; assisted flows carry sales-agent commissions, telecalling, and relationship-manager time; the digital funnel doesn't. Which means every customer we push from digital into assisted (or lose entirely to a competitor) is worse economics <em>and</em> worse experience.</p>
+
+<h2>The method</h2>
+
+<p><strong>Five behavioural cohorts.</strong> Intersecting time on the page, scroll depth, interaction count, revisit pattern, and application status. Each cohort represented a different kind of hesitation.</p>
+
+<p><strong>Mixed-method research: 42 moderated depth interviews plus ~950 unmoderated survey and diary responses.</strong> Moderated for the drop-offs who had shown high engagement &mdash; I wanted to understand what nearly-converted customers thought. Unmoderated for scale.</p>
+
+<p><strong>CIBIL cross-reference on the drop-off cohort.</strong> The single most useful analytical input in the project. Every hypothesis about "was this customer serious" collapsed the moment we had bureau data telling us who had subsequently borrowed and at what rate.</p>
+
+<h2>What customers told us</h2>
+
+<p>The interviews surfaced a pattern I hadn't expected.</p>
+
+<p>When we asked drop-offs why they left, most cited the interest rate. When we asked whether they had understood the rate and charges, they said yes. When we probed further, a different picture emerged.</p>
+
+<p>The page wasn't confusing. It was creating <em>perceived</em> complexity. Too many numbers to hold in working memory. Too many charges to reconcile. A layout that felt like it required a CA to interpret. A general sense that this was a decision that shouldn't be made alone.</p>
+
+<p>They weren't dropping because they didn't understand. They were dropping because they didn't want to work that hard to decide.</p>
+
+<p>Then we asked the drop-offs who had borrowed elsewhere what happened on the competing platform. The answer was almost embarrassing.</p>
+
+<p>They applied. Not because the competitor was cleverer. Because there was nothing else to do on those pages. The competitor had already moved them into the funnel while we were still asking them to evaluate.</p>
+
+<div class="callout">
+The insight worth defending: the drop-offs weren't rejecting our offer. They were rejecting the <em>cognitive cost</em> of accepting it. Which meant the fix wasn't a better offer &mdash; it was a lower cost of entry.
+</div>
+
+<h2>The compliance question, addressed head-on</h2>
+
+<p>The obvious business reaction &mdash; "if all this information is creating friction, remove it" &mdash; was a non-starter for a regulated lending product. Roughly half our disclosures aren't design choices; they're Fair Practice Code obligations, and moving them arbitrarily invites a bad conversation with the regulator.</p>
+
+<p>So I framed the compliance work as parallel, not downstream. Before we shipped anything, I worked with Legal and Compliance to classify every element on the page into one of three buckets:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>What it is</th>
+      <th>Where it must live</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>A</strong></td>
+      <td>Regulator-mandated at pre-commitment</td>
+      <td>Must appear before the customer commits to borrow &mdash; offer screen, not discovery page</td>
+    </tr>
+    <tr>
+      <td><strong>B</strong></td>
+      <td>Regulator-mandated as disclosure</td>
+      <td>Must be accessible &mdash; not necessarily above the fold on the discovery page</td>
+    </tr>
+    <tr>
+      <td><strong>C</strong></td>
+      <td>Product-driven</td>
+      <td>Placement is a product choice</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Category A &mdash; annual rate, processing fee, the standardised key-facts summary the RBI requires &mdash; moved to the offer screen the customer sees before consenting to disburse. That screen already existed and was already the compliant point of commitment. We were, if anything, sharpening its regulatory role, not diluting it.</p>
+
+<p>Category B stayed on the discovery page but moved below the fold with clear disclosure links. Category C &mdash; the redundant reiteration of terms, the pre-set illustrative EMI callouts, the fine print about waivers &mdash; was the freed real estate we redesigned around.</p>
+
+<p>I got written sign-off from Legal and Compliance before any A/B test went live. That memo turned out to be the single most useful artefact of the project. It's what let us defend the redesign in every subsequent internal review &mdash; and it's what would let us defend it to an audit if it came to that.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>The build: engagement before commitment</h2>
+
+<p>For a lending product, the interaction the customer already wants is <em>what will I pay every month if I borrow this much.</em> The EMI calculator became the obvious hook. Slide the amount, see the EMI, adjust the tenure, understand the shape of the commitment.</p>
+
+<p>We changed the primary call-to-action from <strong>Apply Now</strong> to <strong>Check Offer</strong>. Small change, much bigger shift. <em>Apply</em> asks for commitment; <em>Check</em> invites exploration. Nothing about the underlying journey changed &mdash; the customer still landed in the same funnel &mdash; but the framing lowered the perceived cost of the next step from <em>"I am now a loan applicant"</em> to <em>"I am just seeing what I'd get."</em></p>
+
+<p>The first two scrolls became: calculator, EMI visibility, product summary, Check Offer. Detailed charges lived further down and were one tap away. Category A items now sat authoritatively on the offer screen.</p>
+
+<p>This wasn't hidden disclosure. It was sequenced disclosure &mdash; right information, right stage.</p>
+
+<h2>Testing and rollout</h2>
+
+<p><strong>80/20 A/B test for 18 days.</strong> Reached 95% confidence. Variant delivered a 15-point lift in the share of visitors who began an application (from ~30% to ~45%).</p>
+
+<p><strong>Held at 50/50 for another 10&ndash;15 days.</strong> I did not want to ramp to 100 on a single window. Business Loan traffic has weekly and pay-cycle rhythms, and I wanted to see the effect hold across at least one full cycle before rolling out. It did.</p>
+
+<p><strong>Component-level splits</strong> to isolate call-to-action vs. calculator contribution. Neither was individually powered enough to conclude. My working hypothesis is that the call-to-action reframe carried more of the lift than the calculator &mdash; session recordings showed many users tapping Check Offer before ever engaging the calculator &mdash; but I could not prove it inside the timeline. The honest read: the two changes were mutually reinforcing. I should have designed the isolation into the sequence from day one.</p>
+
+<h2>The downstream trade-off</h2>
+
+<p>A higher application start rate wasn't the end of the story. More applications means more downstream rejections, more ops load on verification and underwriting, and more customer-facing <em>"we could not approve you"</em> moments. Each of those has a cost.</p>
+
+<p>The full funnel:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th class="num">Baseline</th>
+      <th class="num">Post-change</th>
+      <th class="num">Delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Application start rate</td>
+      <td class="num">~30%</td>
+      <td class="num">~45%</td>
+      <td class="num"><strong>+15 pts</strong></td>
+    </tr>
+    <tr>
+      <td>Application &rarr; approval</td>
+      <td class="num">~7.2%</td>
+      <td class="num">~5.6%</td>
+      <td class="num">&minus;1.6 pts</td>
+    </tr>
+    <tr>
+      <td>Approval &rarr; disbursal</td>
+      <td class="num">~37%</td>
+      <td class="num">~36%</td>
+      <td class="num">&minus;1 pt</td>
+    </tr>
+    <tr class="highlight">
+      <td>End-to-end (visit &rarr; disbursed)</td>
+      <td class="num">~0.80%</td>
+      <td class="num">~0.91%</td>
+      <td class="num"><strong>+14% rel.</strong></td>
+    </tr>
+    <tr>
+      <td>Digital share of Business Loan acquisition</td>
+      <td class="num">baseline</td>
+      <td class="num">+6 pts</td>
+      <td class="num">(structural)</td>
+    </tr>
+    <tr class="highlight">
+      <td>Incremental monthly disbursals</td>
+      <td class="num">&mdash;</td>
+      <td class="num">~&#8377;40 Cr/mo</td>
+      <td class="num"><strong>~&#8377;480 Cr ann.</strong></td>
+    </tr>
+  </tbody>
+</table>
+<p class="footnote">Approval rate dropped as expected &mdash; a wider top of funnel pulls in customers who otherwise wouldn't have applied and therefore wouldn't have been rejected. That is the honest cost of the redesign.</p>
+
+<p>The overall economics still improved. Digital acquisition cost on Business Loan was roughly 40% of assisted, and the lifetime-value difference between the two customer sets was within noise. The additional ops load was more than absorbed by the shift in channel mix.</p>
+
+<div class="callout">
+A successful product experiment is not one where every metric moves in the same direction. It's one where the end-to-end economics improve after you account for what you broke.
+</div>
+
+<p>One caveat about the trade-off. There is a segment of Business Loan customers who genuinely need an assisted flow &mdash; first-time credit users, thin-file proprietors, high-ticket seekers who want a relationship manager. The redesign was not trying to convert them. It was trying to stop losing the digitally-native SME owner who was ready to self-serve but was being forced into an assisted flow by the complexity of the page. That segmentation matters, and it's the frame that got the redesign past the assisted-channel leadership.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>What I would do differently</h2>
+
+<p><strong>One:</strong> design the attribution into the test sequence, not around it. The calculator vs. call-to-action ambiguity is not fatal, but it means the learning does not port cleanly to the other lending pages. On the secured products where we are now attempting a similar reframe, we are staggering the changes so the isolation is designed in.</p>
+
+<p><strong>Two:</strong> instrument the offer screen more aggressively before shipping. We moved the Category A disclosures onto the offer screen assuming customers would read them there. Dwell time on the offer screen went up. But comprehension &mdash; measured by a follow-up survey asking customers to recall the processing fee they had just consented to &mdash; was only marginally better than on the original page. The disclosures are <em>legally</em> in the right place. Whether they are <em>behaviourally</em> in the right place is a live question.</p>
+
+<p><strong>Three:</strong> I still don't fully know what fraction of the lift came from removing perceived complexity versus adding perceived agency (the calculator giving users a sense of control). Those are different psychological mechanisms with different implications for how we design the rest of the funnel. Worth its own study.</p>
+
+<footer class="piece">
+Full data &mdash; cohort definitions, funnel numbers, CIBIL cross-reference methodology, and the compliance classification memo (redacted) &mdash; available on request at <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>

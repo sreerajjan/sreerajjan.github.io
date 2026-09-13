@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The JLR playbook wasn't enough &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --accent: #1a4d7c;
+    --highlight: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul { margin: 0 0 18px; padding-left: 22px; }
+  article ul li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  .glance { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 22px 26px; margin: 0 0 40px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
+  .glance .glance-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 14px; }
+  .glance dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 20px; }
+  .glance dt { font-weight: 600; color: var(--ink-2); }
+  .glance dd { margin: 0; color: var(--ink-2); }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+    .glance dl { grid-template-columns: 1fr; gap: 4px 0; }
+    .glance dt { margin-top: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">The JLR playbook wasn't enough</h1>
+<p class="subtitle">How we rebuilt a requirements-management platform around Tata Motors' engineering reality</p>
+<p class="meta">2017&ndash;2021 &middot; Automotive &middot; Case study</p>
+
+<p class="hook">A commercial-vehicle engineer at Tata Motors, asked to design a brake pedal, would optimise for the pedal stopping the vehicle within a specified distance at a specified speed. A JLR engineer, given the same brief, would also specify that the pedal must not kick back into the driver's foot. Both answers are technically right. Only one has the user in it. RMDV2 was the tool that had to hold both ways of thinking at once &mdash; and translate between them.</p>
+
+<div class="glance">
+<p class="glance-title">The build at a glance</p>
+<dl>
+  <dt>Product</dt>
+  <dd>RMDV2 &mdash; Requirements Management, Design Verification &amp; Validation</dd>
+
+  <dt>Type</dt>
+  <dd>0-to-1 build, adapted from JLR's reference model</dd>
+
+  <dt>My role</dt>
+  <dd>Product Manager &mdash; requirements discovery and product definition, working across IBM's build team, Tata engineering leads and the internal technology team</dd>
+
+  <dt>Direct users</dt>
+  <dd>Requirements engineers, testing engineers, engineering sign-off (ESO) teams, programme managers, function heads. The vehicle driver was the downstream beneficiary whose experience needed to be encoded into the requirements</dd>
+
+  <dt>Built in MVP</dt>
+  <dd>Requirements authoring, test-case authoring and execution, defect linkage, sign-off routing, timeline analytics dashboards, legacy-mapping automation</dd>
+
+  <dt>Pilot</dt>
+  <dd>1 vehicle programme, 6 months</dd>
+
+  <dt>Scale at exit (Oct 2021)</dt>
+  <dd>~50 vehicle programmes, expanded from passenger into electric, commercial, and defence</dd>
+
+  <dt>Scale today</dt>
+  <dd>~300 vehicle programmes</dd>
+
+  <dt>One measure of shift</dt>
+  <dd>~10,000+ requirements per vehicle programme after the shift to experience-driven authoring, versus a much smaller pre-shift count that closely tracked the test-case count</dd>
+</dl>
+</div>
+
+<h2>Why this project existed</h2>
+
+<p>Tata Motors acquired JLR in 2008. Along with the brand and the plants came a set of engineering practices that were meaningfully more mature than anything Tata was running at home. JLR used IBM's DOORS-based tooling for requirements management, ran verification and validation as first-class engineering functions, and had process discipline shaped by decades of premium-vehicle expectations.</p>
+
+<p>Tata's Indian engineering org, by contrast, was running a system that would surprise most people used to modern automotive. PLM for component data. CAD for design views. Paper for test cases and reports. Project managers physically walked stacks of testing documentation between buildings. Excel was used in patches, but every function &mdash; chassis, body &amp; trims, engine, outdoor testing, indoor testing &mdash; had its own template. There was no single system where an engineer could trace a requirement to its test result to its sign-off.</p>
+
+<p>The failure modes were predictable and expensive. Engineers built to component specs that had already been revised, because the updated paper hadn't reached them. Bugs surfaced late in the vehicle programme because the paper trail of who had tested what was scattered across desks. Vehicle programmes frequently exceeded their planned timelines. And underneath the visible delay costs was a deeper one: component quality issues that should have been caught in testing but weren't, because the testing data was invisible to anyone not immediately involved.</p>
+
+<p>After the JLR acquisition, Tata partnered with Warwick University consultants to bring JLR's engineering practice into the parent organisation. RMDV2 &mdash; the requirements management and design verification &amp; validation platform &mdash; was the tooling half of that transfer. My job wasn't to roll out JLR's version. It was to rebuild something with the same purpose that would actually work at Tata.</p>
+
+<p>I owned requirements discovery and product definition for the workflows sitting between engineering requirements, testing, and sign-off. I was one of several PMs on the programme, working across IBM's build team, Tata's engineering leads, and the internal technology team owning the platform. My core responsibility was translating engineering workflows into the product backlog, prioritising across functions, and resolving where the JLR reference model conflicted with Tata's operating reality.</p>
+
+<h2>What wouldn't survive contact</h2>
+
+<p>The first month made two things obvious about the JLR reference model.</p>
+
+<p><strong>The first was structural.</strong> At JLR, the supplier and accountability model placed significant responsibility for component verification and validation with suppliers. Which meant JLR's engineering process could be requirements-heavy and testing-light. Write the requirements rigorously, hand them to the supplier, and rely primarily on supplier-side testing.</p>
+
+<p>At Tata, engineering teams needed much stronger internal ownership of verification and validation. Tata engineering had to be rigorous on both sides: writing the requirements <em>and</em> independently testing whether the delivered component actually met them. If I had copied JLR's tool as-is, I would have shipped something useful for half of Tata engineering's job and useless for the other half.</p>
+
+<p>By the time we shipped, roughly half of the functional scope was testing and V&amp;V workflows that weren't meaningfully represented in the JLR reference model &mdash; test case authoring, execution tracking, defect linkage, sign-off routing. This is my approximate assessment of the split, not a formal product metric. It's the part of the product I'm proudest of, because there was no playbook to copy. It looked less like product management and more like sitting in a room with a testing lead for three weeks and figuring out what would actually let them stop pushing paper.</p>
+
+<p><strong>The second was cultural, and harder.</strong> Tata's engineering culture had historically optimised heavily for robustness, durability, and specification compliance &mdash; shaped by decades of commercial-vehicle work where the customer of a Tata truck was the fleet owner and the user was the driver. Engineers were wired to build parts that would withstand more load, rougher roads, and longer intervals between service than the spec formally required.</p>
+
+<p>The passenger vehicle business changed that. When the customer <em>is</em> the user, the way you write a requirement has to change with it. The brake pedal isn't just a component that must stop the vehicle within a distance at a speed. It's also a component the driver's foot rests on, that must feel confident under pressure, that must not kick back in a way that startles a first-time driver. Every requirement needs a layer that says: <em>and here's what the user experiences when this works</em>.</p>
+
+<p>Warwick and JLR called this experience-driven requirements. In practice it meant restructuring the requirements template &mdash; every functional requirement had to have a paired user-experience clause, and neither was optional. It also meant retraining engineers whose entire careers had been about the first clause to write the second one seriously.</p>
+
+<p>The scale effect was immediate. Before the shift, requirements were tightly coupled to test cases &mdash; the count of requirements per vehicle programme was roughly the count of test cases. After the shift, each test case fanned out into multiple user-experience requirements, and vehicle programmes started carrying ~10,000+ requirements each. The information volume the tool had to manage went up by an order of magnitude, which was itself a design constraint we had to build for.</p>
+
+<div class="callout">
+Half the product I shipped had no reference model. That's what makes it a 0-to-1 rather than an adaptation. The JLR playbook gave shape to the ambition; it didn't give shape to the product.
+</div>
+
+<h2>How I gathered what to build</h2>
+
+<p>I ran one-on-ones with the function lead of each group &mdash; chassis, body &amp; trims, engine, testing &mdash; because open workshops with fifty-plus engineers would have produced design-by-committee. Function leads carry the collective view of their team and can commit on behalf of their group.</p>
+
+<p>But leadership views can override frontline pain if that's all you rely on, so I embedded more directly with the engineers themselves. I shadowed them at their desks. I studied the Excel templates they were actually using. I built my own working version of a requirement-to-test-case map and sat with them to validate whether it matched how they'd expect to work. When the MVP was ready, I ran the training myself &mdash; how to author requirements in the new template, how to validate the test cases that had been auto-mapped from legacy data, how to read the dashboards. And I sat in on the monthly function reviews, where engineers walked their function heads through project status using the tool.</p>
+
+<p>The last part was the most useful validation loop I've ever had on a product. A function head who couldn't understand the reports being shown to them by their own team was the fastest way to spot a design problem.</p>
+
+<h2>MVP scoping decisions</h2>
+
+<p>Three things went into the MVP that were adoption-critical, and worth naming because they were the actual product work.</p>
+
+<p><strong>Legacy-mapping automation.</strong> Every function had years of test cases written in Excel. Manually re-authoring them into RMDV2 would have killed adoption before it began. We built automation that took legacy test cases and auto-mapped them to the new requirement structure, then queued them for engineer validation before they became line items in the project tracker. This was the difference between "the new tool means starting from scratch" and "the new tool respects what you already have."</p>
+
+<p><strong>Timeline analytics dashboards.</strong> I defined and wrote the queries for a dashboard that let function heads and programme managers filter test cases by function, see status (in progress, validated, invalid, delayed), and drill down into any delayed item to see the reason and who it was pending on. This turned the tool from a system-of-record into something a function head would actually open in a review meeting.</p>
+
+<p><strong>Granular role-based access for the engine team.</strong> I'll come to this next. It slowed the rollout, but it was non-negotiable for a function that couldn't otherwise adopt.</p>
+
+<p>There were things I remember pushing to later releases, but I don't remember the full deferred list well enough to reconstruct it faithfully. The three above are the ones I owned end-to-end.</p>
+
+<h2>The engine team</h2>
+
+<p>The engine team resisted RMDV2 longer than any other function. Engine data &mdash; design, testing, performance characteristics &mdash; is proprietary in a way other component data isn't. Sharing it into a system where other teams could see it, even with permissions, was a step they weren't willing to take.</p>
+
+<p>The solution was a granular role-based access model built specifically for their needs. A separate DOORS instance. Model titles visible in the system but contents restricted. A second permission layer at the test-case UI, so that even engineers who could see requirements couldn't necessarily see the test cases derived from them. It took months of design work that no other function required, and it slowed the rollout meaningfully.</p>
+
+<p>They eventually came in. And the permission model we built for them ended up strengthening the platform overall &mdash; it forced us to think about access at a much finer grain than we would have otherwise, which turned out to matter later when the platform expanded into defence vehicle programmes with their own confidentiality regimes.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>Outcome</h2>
+
+<p>The clearest outcome was adoption. The MVP shipped in roughly a year from first scope. The first vehicle programme ran on it for six months as a pilot. Adoption expanded to about ten programmes over the following year and continued to scale. At my exit in October 2021, RMDV2 was running roughly 50 vehicle programmes, having expanded from passenger into electric, commercial, and defence. The system has since scaled to roughly 300 programmes.</p>
+
+<p><strong>Requirements captured.</strong> Each vehicle programme on RMDV2 carried ~10,000+ requirements after the shift to experience-driven authoring, versus a much smaller pre-shift count that closely tracked the test-case count.</p>
+
+<p><strong>Sign-off cycle time.</strong> Sign-off cycle time between engineering sign-off, testing, and programme management reduced meaningfully after launch, per the qualitative report from those teams. I don't have a specific number I'd defend.</p>
+
+<p><strong>Programme timelines.</strong> Vehicle programmes at Tata had historically exceeded their 36-month commitment by around 12 months. Programmes running on RMDV2 began moving back toward the original target, but I wouldn't attribute that change to RMDV2 alone. There are too many interacting variables across a vehicle programme for me to defend a causal number.</p>
+
+<h2>What I still don't have a clean answer for</h2>
+
+<p>The engine team question. In hindsight the permission model we built worked, and it strengthened the platform. What I don't know is whether an earlier conversation &mdash; bringing the engine team into the design of that permission model from month one rather than month five &mdash; would have shortened the resistance and got us to full-org adoption faster.</p>
+
+<p>I honestly still don't have a good answer. Sometimes the right posture with a resistant stakeholder is patience; sometimes it's early co-design. I ran the first play, and it worked, and I'll never know if the second play would have worked better.</p>
+
+<h2>What I took into fintech</h2>
+
+<p>RMDV2 taught me that product management is often translation work. The hardest part isn't understanding every domain deeply enough to become the expert; it's understanding the expert well enough to preserve what matters when their workflow becomes a product.</p>
+
+<p>I carried that muscle into lending, where the experts are different &mdash; risk, credit, compliance, engineering, operations &mdash; but the translation problem is remarkably similar. Every senior product decision in a lender is a translation problem before it is a product problem.</p>
+
+<footer class="piece">
+An older piece of work, kept in the portfolio because the shape of the problem still shapes how I think. Happy to talk about how it maps to what I do now in lending &mdash; <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>

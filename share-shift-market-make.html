@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share-shifting vs. market-making &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --accent: #1a4d7c;
+    --highlight: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "← "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ol, article ul { margin: 0 0 18px; padding-left: 22px; }
+  article ol li, article ul li { margin-bottom: 8px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager · Consumer &amp; Fintech · Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">Share-shifting vs. market-making</h1>
+<p class="subtitle">Two postures for entering a mature category &mdash; and why incumbents almost always pick the wrong one</p>
+<p class="meta">September 2026 &middot; Essay</p>
+
+<p class="hook">When the Indian gold loan industry reports 50%+ AUM growth, it sounds like a category on fire. It isn't. The tonnage of pledged gold has grown in single digits over the same window. The industry isn't adding borrowers &mdash; it's revaluing the ones it already has.</p>
+
+<p>That's not a criticism. Revaluation is real profit. But it isn't market expansion, and calling it market expansion causes strategy errors that show up two years later when the tailwind stops.</p>
+
+<h2>The confusion between revaluation and growth</h2>
+
+<p>Every mature category eventually hits a moment where the underlying customer base stops expanding and the &#8377; numbers keep climbing. Prices go up, ticket sizes rise, incumbents raise limits on existing customers, and the top line looks great. The strategy decks read like the category is growing 40%. The customer base is growing 4%.</p>
+
+<p>This matters because it fools challengers. A challenger looks at a 40%-growing category and thinks: I want in. They enter with a share-shifting playbook &mdash; better UX, lower fees, faster onboarding. They win share against incumbents, celebrate, and then hit the same customer wall the incumbents already hit. The tailwind that made the category look interesting was never customer growth. It was revaluation.</p>
+
+<p>The right question, before entering any mature category, is: <em>is the market growing in accounts, or in ticket size?</em> If it's ticket size, you're not entering a growth market. You're entering a revaluation market. Different game.</p>
+
+<h2>The two postures</h2>
+
+<p>Once you can tell them apart, two distinct strategic postures become available:</p>
+
+<p><strong>Share-shifting.</strong> You take customers from incumbents. The market is roughly the size it's going to be; you win by being better at serving customers who already exist. Playbook: benchmark against the incumbent, find the specific dimension where they're worst (price, UX, speed, trust), attack that dimension, migrate customers over.</p>
+
+<p><strong>Market-making.</strong> You create customers who weren't in the category before. The market grows because you enter it. Playbook: identify why non-customers stayed out (usually not price &mdash; usually comfort, education, or access), remove that barrier, teach the category, and grow the total pie.</p>
+
+<p>The same category can support both postures. Different postures require different companies.</p>
+
+<h2>Zerodha and Groww: two postures, one category</h2>
+
+<p>The clearest recent illustration in Indian consumer finance is what happened to retail investing over the last decade. Two companies, both large, both successful. Different games.</p>
+
+<p><strong>Zerodha ran share-shifting.</strong> In 2010, retail equities in India was dominated by full-service brokers &mdash; ICICI Direct, HDFC Securities, Sharekhan &mdash; charging &#8377;20+ per trade. Zerodha's bet was that a specific customer already existed (informed retail traders who understood demat accounts and were paying too much) and would migrate to a cheaper, cleaner platform. They famously refused to spend on marketing. They didn't need to. The customer already knew they wanted to trade; they just needed a better place to do it.</p>
+
+<p><strong>Groww ran market-making.</strong> Founded in 2016, they targeted a customer who did not yet exist in the category: the salaried millennial who had never opened a demat account and thought investing was for someone else. Groww's early product wasn't cheaper broking. It was mutual funds with a UX that felt like a consumer app instead of a bank portal. The vernacular content, the education-first onboarding, the SIP defaults &mdash; all of it was designed for someone the incumbents weren't serving because that person wasn't buying yet.</p>
+
+<p>Both companies now have crores of users. But if you look at where those users came from, the split is stark. A large share of Zerodha's base migrated from full-service brokers. A large share of Groww's base is first-time equity investors. Zerodha grew by taking. Groww grew by making.</p>
+
+<div class="callout">
+The point isn't that one is better. The point is they're playing different games, and confusing the two would have killed either strategy. If Zerodha had spent on vernacular education, they'd have burned cash chasing customers they weren't set up to serve. If Groww had led with "lowest brokerage in India," they'd have won a knife fight for a customer who wasn't ready to hold a knife.
+</div>
+
+<h2>Why incumbents systematically pick the wrong posture</h2>
+
+<p>Incumbents in mature categories almost always default to share-shifting &mdash; even when the real opportunity is market-making. There are four structural reasons.</p>
+
+<p><strong>Attribution windows.</strong> Marketing systems measure payback in weeks. Share-shifting produces a converted customer in that window. Market-making produces a customer who is <em>considering</em> the category in that window and converts 12&ndash;18 months later. The attribution model tells the CMO that market-making doesn't work, and the CMO believes it.</p>
+
+<p><strong>Sales incentives.</strong> Field teams and branch staff are compensated on deals closed. Deals close faster with customers already familiar with the product. Every incentive in the system tells the frontline to talk to the customer who already knows what the product is, not the household that owns the asset and has never used it as one.</p>
+
+<p><strong>Unit economics benchmarks.</strong> The customer acquisition cost for a market-making play is higher than for share-shifting, because you're spending on education and awareness before you spend on conversion. When finance benchmarks the new play against existing acquisition cost, it always looks worse. It should look worse. That's the wrong benchmark.</p>
+
+<p><strong>Board pressure.</strong> Public and PE-backed incumbents optimise for the next quarter. Market-making pays back over years. The board rewards the leader who takes share this quarter; nobody gets promoted for the customer they added to a pipeline that closes in 2027.</p>
+
+<p>None of these are moral failures. They're the natural physics of a mature organisation. And they systematically bias the org toward share-shifting even when the actual money is in market-making.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>The gold loan case</h2>
+
+<p>Which brings us back to gold. The organised Indian gold loan industry has around 4,575 tonnes of pledged gold. Indian households own around 34,600 tonnes. The pledged number is 13% of the owned number. Nearly nine of every ten grams of Indian household gold has never been near a formal lender.</p>
+
+<p>The industry's growth story of the last three years is almost entirely share-shifting inside that 13%. NBFCs vs. banks vs. moneylenders, all fighting for slices of the same pledged pie, with the pie itself getting more valuable because gold prices went up. Muthoot's most recent disclosures show gold loan AUM growing 40%+ while pledged tonnage growth is in single digits. Manappuram sits in a similar shape. This is the revaluation-vs-accounts pattern in the wild, and it's dressed up as category growth in every industry report.</p>
+
+<p>The market-making play &mdash; convincing the 87% of gold owners who have never pledged that gold can be a rational credit instrument, not a distress signal &mdash; is available. It is enormous. It is also structurally harder than what every incumbent is currently doing, requires patience the current playbooks don't reward, and forces a product that looks different from what exists (custody models, insurance framing, non-branch touchpoints, "keep your jewellery" positioning).</p>
+
+<p>Nobody at scale is doing this yet. That's the tell.</p>
+
+<h2>The test</h2>
+
+<p>The heuristic I actually use, before joining a bet in a mature category:</p>
+
+<ol>
+  <li>Is the market growing in accounts, or in ticket size? If ticket size, don't confuse it for growth.</li>
+  <li>If you're share-shifting, name the specific incumbent weakness you're exploiting. If you can't name it in one sentence, you don't have a wedge.</li>
+  <li>If you're market-making, name the specific non-customer you're bringing in and why they stayed out until now. "The market is underpenetrated" is not an answer.</li>
+  <li>Confirm your org can actually run the posture you've picked. Incumbents saying "we'll do market-making" and market-makers saying "we'll also take incumbent share" are usually about to waste 18 months.</li>
+</ol>
+
+<p>The clearest strategy work I've seen starts by picking one of these two games explicitly and refusing to play the other. The muddiest starts with "we'll do both" and never commits.</p>
+
+<footer class="piece">
+This is a working framework, not a finished one. If you disagree &mdash; especially on the incumbent-structural-bias claim &mdash; I'd like to hear it. <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>© 2026 Sreeraj Janardhanan · <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> · <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>

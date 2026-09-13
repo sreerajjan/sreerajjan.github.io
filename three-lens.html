@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three-lens Triangulation &mdash; Sreeraj Janardhanan</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --ink: #111;
+    --ink-2: #333;
+    --ink-3: #666;
+    --ink-4: #999;
+    --line: #e5e5e5;
+    --line-2: #f0f0ed;
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --accent: #1a4d7c;
+    --accent-bg: #e8f0f7;
+    --highlight: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif; font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  header.site { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 48px; }
+  header.site h1 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  header.site h1 a { color: var(--ink); text-decoration: none; }
+  header.site p { margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; color: var(--ink-3); }
+  header.site nav { margin-top: 14px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; }
+  header.site nav a { color: var(--ink-2); text-decoration: none; margin-right: 20px; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  header.site nav a:hover { border-bottom-color: var(--accent); }
+
+  .back-link { display: inline-block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); text-decoration: none; margin-bottom: 32px; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: "\2190  "; }
+
+  article h1.title { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 34px; line-height: 1.2; letter-spacing: -0.02em; margin: 0 0 10px; }
+  article .subtitle { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; color: var(--ink-3); margin: 0 0 6px; font-weight: 400; }
+  article .meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); margin: 0 0 40px; letter-spacing: 0.02em; text-transform: uppercase; }
+  article h2 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 56px 0 16px; }
+  article h3 { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 600; margin: 36px 0 10px; }
+  article p { margin: 0 0 18px; }
+  article p em { font-style: italic; color: var(--ink-2); }
+  article strong { font-weight: 600; }
+  article ul, article ol { margin: 0 0 18px; padding-left: 22px; }
+  article ul li, article ol li { margin-bottom: 6px; }
+
+  .hook { font-size: 20px; line-height: 1.6; color: var(--ink); border-left: 3px solid var(--accent); padding: 4px 0 4px 20px; margin: 0 0 32px; font-style: italic; }
+  .callout { background: var(--highlight); border-radius: 4px; padding: 18px 22px; margin: 24px 0; font-size: 17px; font-style: italic; }
+  .divider { text-align: center; color: var(--ink-3); margin: 48px 0; letter-spacing: 0.5em; font-size: 12px; }
+
+  /* Lens blocks */
+  .lens { margin: 0 0 26px; padding: 0; }
+  .lens .name { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 15px; font-weight: 600; color: var(--ink); margin: 0 0 6px; }
+  .lens .body { margin: 0 0 6px; }
+  .lens .body strong { font-weight: 600; color: var(--ink-2); }
+
+  /* Signal ladder */
+  .ladder { margin: 28px 0 32px; font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+  .ladder .rung { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 20px; margin-bottom: 10px; }
+  .ladder .rung:last-child { border-color: var(--accent); background: var(--accent-bg); margin-bottom: 0; }
+  .ladder .rung-head { font-size: 14px; font-weight: 600; color: var(--ink); margin: 0 0 5px; }
+  .ladder .rung-body { font-size: 14px; color: var(--ink-3); margin: 0; line-height: 1.55; }
+
+  /* Observed vs inferred */
+  .evidence-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 26px 0 30px; font-family: -apple-system, 'Inter', system-ui, sans-serif; }
+  .evidence-split .col { padding: 18px 22px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+  .evidence-split .col-label { font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3); font-weight: 700; margin: 0 0 10px; }
+  .evidence-split .col-body { font-size: 14px; color: var(--ink-2); margin: 0; line-height: 1.55; }
+
+  /* Hypothesis */
+  .hypothesis { background: var(--accent-bg); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; padding: 18px 22px; margin: 24px 0; font-size: 17px; }
+  .hypothesis p { margin: 0; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 26px 0 30px; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 14px; }
+  th { text-align: left; font-weight: 600; color: var(--ink-2); border-bottom: 1.5px solid var(--line); padding: 10px 12px 10px 0; vertical-align: bottom; }
+  td { border-bottom: 1px solid var(--line-2); padding: 12px 12px 12px 0; vertical-align: top; color: var(--ink-2); line-height: 1.5; }
+  td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  footer.piece { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.piece a { color: var(--accent); text-decoration: none; }
+
+  footer.site { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line); font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px; color: var(--ink-3); }
+  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .container { padding: 40px 20px 80px; }
+    article h1.title { font-size: 28px; }
+    article h2 { font-size: 20px; }
+    body { font-size: 17px; }
+    table { font-size: 13px; }
+    td:first-child { white-space: normal; }
+    .evidence-split { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<header class="site">
+  <h1><a href="index.html">Sreeraj Janardhanan</a></h1>
+  <p>Senior Product Manager &middot; Consumer &amp; Fintech &middot; Bangalore</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="mailto:sreerajjan18@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+</header>
+
+<a class="back-link" href="index.html">Back to home</a>
+
+<article>
+
+<h1 class="title">Three-lens Triangulation</h1>
+<p class="subtitle">Business, industry, consumer &mdash; and why the domain that finds the problem shouldn't be allowed to explain it</p>
+<p class="meta">Framework</p>
+
+<p class="hook">Every observation comes pre-fitted with an explanation, and the explanation comes from the domain the observation was found in. Funnel data hands you funnel-shaped causes. Market data hands you market-shaped ones. Research hands you the reason the customer could articulate. Each is coherent on its own, which is exactly what makes it dangerous.</p>
+
+<h2>What the framework is</h2>
+
+<p>Three lenses trained on the same question. What is happening inside the business. What is happening in the industry around it. What is happening with the customer &mdash; what they say, and what they do while you watch them.</p>
+
+<p>Each lens produces observations, and each observation is easy to close out with a fix belonging to its own domain. The framework is the discipline of holding it open &mdash; refusing the local explanation &mdash; until something from another domain has had a chance to contradict it.</p>
+
+<p>What comes out of the synthesis is not a fix. It is a tension in the customer's world that none of the three lenses named on its own, stated precisely enough to be tested.</p>
+
+<h2>The three lenses</h2>
+
+<div class="lens">
+<p class="name">Business</p>
+<p class="body"><strong>What it answers:</strong> what is happening inside the product and the P&amp;L right now, at population scale. Funnel performance, clickstream, transaction and system data, service and operations load, cohort behaviour.</p>
+<p class="body"><strong>Where it misleads:</strong> everything it shows you happened inside a system you built, so every anomaly arrives already dressed in that system's vocabulary. An unconsumed offer looks like an activation problem, because activation is the only category the funnel has for it. The business lens is superb at telling you <em>where</em> and weak at telling you <em>why</em> &mdash; even when the data makes the explanation feel obvious.</p>
+</div>
+
+<div class="lens">
+<p class="name">Industry</p>
+<p class="body"><strong>What it answers:</strong> what is moving around you, including things happening to your customer that have nothing to do with you. Competitor moves, regulatory and policy change, published household and consumption data, technology shifts, adjacent categories your customer also buys from &mdash; and external records of what your own customers did after they left you, which your systems cannot see.</p>
+<p class="body"><strong>Where it misleads:</strong> it is directionally rich and causally empty. You can watch a category grow 40% a year and have no idea which of five motives is driving it. The industry lens gives you the shape of a behaviour and never its reason &mdash; and the reason is usually the part you needed.</p>
+</div>
+
+<div class="lens">
+<p class="name">Consumer</p>
+<p class="body"><strong>What it answers:</strong> who the customer is and what the moment feels like from inside it. Demographics and psychographics, stated need from interviews and surveys, and &mdash; separately, and more usefully &mdash; behaviour observed directly while they are doing the thing you care about.</p>
+<p class="body"><strong>Where it misleads:</strong> people report the motive that is socially safest and cognitively nearest. In lending, that motive is almost always price. Stated reasons are real data about how the customer narrates the decision, and weak data about what drove it.</p>
+</div>
+
+<h2>Why the local explanation is the problem</h2>
+
+<p>The failure mode this framework exists to prevent is not missing data. Teams rarely lack observations. The failure mode is closing an observation inside the domain that produced it. The funnel anomaly gets a funnel fix, the competitor launch gets a feature response, the research finding gets a copy change &mdash; and the underlying tension sits exactly where it was, which is why the same anomaly returns under a different name eighteen months later.</p>
+
+<p>The test I apply before acting on any single observation: <strong>can I explain this without leaving the domain I found it in?</strong> If I can, I have almost certainly not understood it yet. The explanations that hold up are the ones that had to reach across.</p>
+
+<h2>What counts as a signal</h2>
+
+<div class="ladder">
+  <div class="rung">
+    <p class="rung-head">One lens &mdash; an observation</p>
+    <p class="rung-body">A finding with a tidy local explanation. Worth logging, occasionally worth fixing locally, not worth a strategy. Most of what a business measures lives here permanently.</p>
+  </div>
+  <div class="rung">
+    <p class="rung-head">Two lenses &mdash; a signal</p>
+    <p class="rung-body">The same tension shows up somewhere it had no reason to. The observation has survived one genuine attempt at contradiction. This is the point at which dedicated research is justified.</p>
+  </div>
+  <div class="rung">
+    <p class="rung-head">Three lenses &mdash; a hypothesis worth testing</p>
+    <p class="rung-body">Business, industry and consumer converge on a tension none of them named individually. The tension is structural &mdash; it lives in the customer's world rather than in your funnel. It is not yet a validated opportunity, and it has no commercial number attached.</p>
+  </div>
+</div>
+
+<p>Before funding a bet on any of this, name the single finding that would most weaken the synthesis. If no such finding exists, you have built a narrative rather than a triangulation.</p>
+
+<div class="divider">&#9670; &#9670; &#9670;</div>
+
+<h2>A worked example: new car financing</h2>
+
+<p>At a major Indian non-bank lender, three observations sat in three different reports, owned by three different teams, none of them remarkable.</p>
+
+<table>
+  <thead>
+    <tr><th>Lens</th><th>What we observed</th><th>The explanation its own domain offers</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Business</td>
+      <td>Pre-approved finance offers, surfaced well before the customer configures the car, are largely not taken up at the dealership when financing is actually chosen</td>
+      <td>Recall and activation. The customer forgot. Fix: more reminders, better placement</td>
+    </tr>
+    <tr>
+      <td>Consumer</td>
+      <td>The same customer, for the same car, approaches several dealers &mdash; comparing discount and rate rather than comparing product</td>
+      <td>Price shopping. Fix: match the best available discount, sharpen the rate</td>
+    </tr>
+    <tr>
+      <td>Industry</td>
+      <td>Third-party pre-delivery inspection has grown into a normal, paid-for step before the customer accepts the vehicle</td>
+      <td>An aftermarket services trend. Adjacent category, unrelated to financing. Fix: none</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each of those fixes would have done something. None of them would have worked.</p>
+
+<h3>The synthesis</h3>
+
+<p>A car buyer spends months choosing the car and minutes choosing the money. Then they spend the rest of the purchase &mdash; and a fair amount of time after it &mdash; suspecting they were shortchanged on the money.</p>
+
+<p>Read that way, the multi-dealer visits may not be price optimisation at all. The customer isn't running an efficient search; they're trying to construct a reference point for a number they have no independent way to verify. Three quotes is not a negotiation strategy. It is a substitute for a benchmark that doesn't exist.</p>
+
+<p>Pre-delivery inspection may be the same instinct, expressed physically, at the handover. The customer is willing to pay a third party to tell them the truth about the thing they are about to accept &mdash; because the party who knows the truth is the party selling it to them.</p>
+
+<p>And the pre-approved offer does not fail on recall. It fails because it stops functioning as a reference point the moment a dealer controls the final number. It was surfaced at a stage where the customer could not yet use it and could not later verify it against what they were eventually given.</p>
+
+<div class="callout">
+The customer depends on the dealer and does not trust the dealer. Both halves are true at once, neither is resolvable by the customer, and nothing in the journey &mdash; ours or anyone else's &mdash; currently sits between them.
+</div>
+
+<h3>Observed, and inferred</h3>
+
+<p>Worth separating, because this is where the synthesis is weakest and it is the first thing I would expect to be challenged on.</p>
+
+<div class="evidence-split">
+  <div class="col">
+    <p class="col-label">OBSERVED</p>
+    <p class="col-body">Early pre-approved offers go largely unused at the point of financing. Customers approach multiple dealers for the same vehicle. Paid third-party pre-delivery inspection is a growing category.</p>
+  </div>
+  <div class="col">
+    <p class="col-label">INFERRED</p>
+    <p class="col-body">That customers lack a trusted reference point at the financing decision moment, and that the three observations are the same absence showing up in three places. The PDI leg is weakest: its growth is measurable, but my reading of <em>why</em> customers buy it is supported by the multi-dealer pattern rather than proven by it.</p>
+  </div>
+</div>
+
+<h3>The hypothesis</h3>
+
+<div class="hypothesis">
+<p>At the dealership decision moment, customers value an independent, understandable benchmark of whether the deal is fair more than they value an earlier pre-approved offer or a marginal reduction in rate.</p>
+</div>
+
+<h3>What I would test first</h3>
+
+<p>The cheapest useful test is retrospective, not prototype-led. Recent buyers who took dealer-arranged financing, walked back through the financing conversation &mdash; with the question of fairness left unasked until they raise it themselves. If the trust reading is right, doubt about the number arrives unprompted, and it arrives faster than any complaint about the rate itself.</p>
+
+<p>The result that would kill the hypothesis: buyers who can recall what they were charged and express no real doubt about whether it was fair. If that comes back, the multi-dealer visits are ordinary price shopping, the unconsumed offers really are an activation problem, and the synthesis was a narrative.</p>
+
+<p>This tests the consumer leg only. It leaves the pre-delivery inspection reading standing, which is what a second round would go at.</p>
+
+<h3>What this is, and what it isn't</h3>
+
+<p>This is a hypothesis produced by triangulation, not a shipped result. The product bet it points at &mdash; the lender occupying the role of independent reference, telling a customer what a fair deal looks like at the moment they cannot tell for themselves &mdash; is a different product from a cheaper rate, and a considerably harder one.</p>
+
+<p>I am including it here because a hypothesis is exactly the kind of thing that is honest to publish before it has a number attached. A framework page that only shows finished wins is showing you the wrong part of the work.</p>
+
+<h2>How this differs from my other two frameworks</h2>
+
+<p><strong>Three-lens triangulation is directional.</strong> It tells you where an opportunity might be, before you know what the product is. It operates across domains, on observations not yet framed as problems.</p>
+
+<p><strong><a href="worn-path.html">The Worn Path</a> is generative.</strong> Once you are inside a product, it finds the gap between the designed journey and the actual one. But it operates inside behavioural data &mdash; one domain &mdash; which is precisely why a worn-path finding needs triangulating before it earns an investment. Left alone, it will get a behaviour-shaped explanation.</p>
+
+<p><strong><a href="hierarchy-of-product-needs.html">The Hierarchy of Product Needs</a> is diagnostic.</strong> Something has gone wrong and you need to know which layer it lives in &mdash; utility, usability, or experience &mdash; so the intervention is aimed at the right problem.</p>
+
+<p>In practice: triangulate to find the tension, worn-path analysis to locate its behavioural marker inside the product, hierarchy to decide what kind of intervention it needs.</p>
+
+<h2>The limits</h2>
+
+<p><strong>Synthesis is judgment, and judgment is where this framework can be abused.</strong> Three observations can be arranged to support almost any story if you go in knowing the story. The only real discipline is to spend your effort trying to break the synthesis rather than decorate it, and to name which leg is inferred.</p>
+
+<p><strong>Convergence can be coincidence.</strong> Three domains pointing the same way raises confidence. It does not establish causation, and the framework offers no test that does.</p>
+
+<p><strong>It is expensive, and most decisions don't deserve it.</strong> Running three lenses properly takes weeks. Reserve it for questions where the commitment is large, the direction is contested, or the obvious answer has already been tried and failed.</p>
+
+<p><strong>All three lenses can share a blind spot.</strong> If the business lens sees your customers, the consumer lens researches your customers, and the industry lens benchmarks competitors serving the same customers, all three are pointed at people already inside the category. Nothing in that arrangement can see a non-customer. I've written about what that costs in <a href="share-shift-market-make.html">Share-shifting vs. market-making</a> &mdash; that Indian households hold roughly 34,600 tonnes of gold against 4,575 tonnes pledged is not visible from inside any lender's funnel.</p>
+
+<h2>Where it shows up in my case studies</h2>
+
+<p>The <a href="pdp-disclosure.html">PDP disclosure experiment</a> is the cleanest completed instance. Business gave us the behavioural cohorts and a stalled funnel. Consumer gave us 42 depth interviews and around 950 unmoderated responses, in which customers named the interest rate. Both agreed, three redesigns followed, nothing moved &mdash; because both lenses were collected on the page and neither could see what happened after the customer left it. The break came from bureau data: a cross-reference on the drop-off cohort showing a meaningful share had borrowed elsewhere within 30 days, some at worse rates. That is an industry-lens input in the sense that matters here: evidence about our own customers held outside our own system &mdash; the only place the contradiction could have come from.</p>
+
+<p>The <a href="search-audit.html">search audit</a> is the honest partial. The business lens was strong: 247 keywords against 1.87M sessions, volume-weighted, which is what exposed the browser-versus-owner split. The consumer lens was thin &mdash; I scored intent match against my own rubric without a second rater, and never put the usability findings in front of real users. The industry lens was absent; I never benchmarked how comparable platforms handle servicing intent in search. The audit was still useful, and it moved search from an unowned surface to a chartered priority. But I would not treat any recommendation from it as a corroborated signal. It rests on one lens.</p>
+
+<footer class="piece">
+The framework I use furthest upstream &mdash; before there is a brief, a metric, or a screen. If you think the car-financing synthesis is a narrative rather than a triangulation, that's the argument I'd most like to have. <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a>.
+</footer>
+
+</article>
+
+<footer class="site">
+  <p>&copy; 2026 Sreeraj Janardhanan &middot; <a href="mailto:sreerajjan18@gmail.com">sreerajjan18@gmail.com</a> &middot; <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a></p>
+</footer>
+</div>
+</body>
+</html>
