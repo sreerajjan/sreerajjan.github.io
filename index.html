@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sreeraj Janardhanan &mdash; Product Strategy &amp; Growth</title>
 <meta name="robots" content="noindex, nofollow">
+
 <style>
   :root {
     --ink: #111;
@@ -18,301 +19,899 @@
     --accent: #1a4d7c;
     --accent-bg: #e8f0f7;
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0; padding: 0; background: var(--bg); color: var(--ink);
-    font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif;
-    font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; }
-  ::selection { background: var(--accent-bg); }
 
-  .shell { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Charter', 'Georgia', 'Iowan Old Style', serif;
+    font-size: 18px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  ::selection {
+    background: var(--accent-bg);
+  }
+
+  .shell {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
   /* ---------- Layout ---------- */
-  .layout { display: grid; grid-template-columns: 268px 1fr; gap: 0 72px; align-items: start; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 268px 1fr;
+    gap: 0 72px;
+    align-items: start;
+  }
 
   /* ---------- Rail ---------- */
-  .rail { position: sticky; top: 0; padding: 76px 0 40px; }
+
+  .rail {
+    position: sticky;
+    top: 0;
+    padding: 76px 0 40px;
+  }
+
   .rail .name {
     font-family: 'Charter', 'Georgia', serif;
-    font-size: 38px; line-height: 1.05; font-weight: 400;
-    letter-spacing: -0.015em; margin: 0 0 18px; color: var(--ink);
+    font-size: 38px;
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    color: var(--ink);
   }
-  .rail .name span { display: block; }
-  .rail .rule { width: 44px; height: 2px; background: var(--accent); margin: 0 0 18px; }
+
+  .rail .name span {
+    display: block;
+  }
+
+  .rail .rule {
+    width: 44px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 0 18px;
+  }
+
   .rail .positioning {
     font-family: -apple-system, 'Inter', system-ui, sans-serif;
-    font-size: 13px; line-height: 1.6; color: var(--ink-3);
-    margin: 0 0 20px; letter-spacing: 0.01em;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-3);
+    margin: 0 0 20px;
+    letter-spacing: 0.01em;
   }
-  .rail .lede { font-size: 16px; line-height: 1.55; color: var(--ink-2); margin: 0 0 26px; }
 
-  .rail-links { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13.5px; margin: 0 0 30px; }
+  .rail .lede {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0 0 26px;
+  }
+
+  .rail-links {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 13.5px;
+    margin: 0 0 30px;
+  }
+
   .rail-links a {
-    display: block; text-decoration: none; color: var(--ink-2);
-    padding: 7px 0; border-bottom: 1px solid var(--line-2);
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex;
+    text-decoration: none;
+    color: var(--ink-2);
+    padding: 7px 0;
+    border-bottom: 1px solid var(--line-2);
+    justify-content: space-between;
+    align-items: center;
   }
-  .rail-links a:first-child { border-top: 1px solid var(--line-2); }
-  .rail-links a:hover { color: var(--accent); }
-  .rail-links a:hover .arw { transform: translateX(3px); opacity: 1; }
-  .rail-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .rail-links .arw { color: var(--ink-4); opacity: 0.65; transition: transform .15s ease, opacity .15s ease; font-size: 12px; }
 
-  .stats { font-family: -apple-system, 'Inter', system-ui, sans-serif; }
-  .stats .row { display: flex; align-items: baseline; gap: 10px; padding: 8px 0; }
-  .stats .n { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: -0.015em; min-width: 76px; }
-  .stats .l { font-size: 11.5px; color: var(--ink-3); line-height: 1.35; }
+  .rail-links a:first-child {
+    border-top: 1px solid var(--line-2);
+  }
+
+  .rail-links a:hover {
+    color: var(--accent);
+  }
+
+  .rail-links a:hover .arw {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+
+  .rail-links a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .rail-links .arw {
+    color: var(--ink-4);
+    opacity: 0.65;
+    transition: transform .15s ease, opacity .15s ease;
+    font-size: 12px;
+  }
+
+  .stats {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+  }
+
+  .stats .row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .stats .n {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    min-width: 76px;
+  }
+
+  .stats .l {
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.35;
+  }
 
   /* ---------- Main ---------- */
-  main { padding: 76px 0 90px; min-width: 0; }
 
-  section + section { margin-top: 68px; }
-  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+  main {
+    padding: 76px 0 90px;
+    min-width: 0;
+  }
+
+  section + section {
+    margin-top: 68px;
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+
   .sec-head h2 {
     font-family: -apple-system, 'Inter', system-ui, sans-serif;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.13em;
-    text-transform: uppercase; color: var(--accent); margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
   }
-  .sec-head .count { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; color: var(--ink-4); }
-  .sec-rule { height: 1px; background: var(--ink); opacity: 0.85; margin: 0 0 4px; }
-  .sec-note { font-size: 16px; color: var(--ink-3); margin: 16px 0 0; line-height: 1.55; }
 
-  /* Entries */
+  .sec-head .count {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    color: var(--ink-4);
+  }
+
+  .sec-rule {
+    height: 1px;
+    background: var(--ink);
+    opacity: 0.85;
+    margin: 0 0 4px;
+  }
+
+  .sec-note {
+    font-size: 16px;
+    color: var(--ink-3);
+    margin: 16px 0 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- Entries ---------- */
+
   .entry {
-    display: grid; grid-template-columns: 40px 1fr; gap: 0 16px;
-    padding: 26px 16px 26px 0; border-bottom: 1px solid var(--line-2);
-    text-decoration: none; position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0 16px;
+    padding: 26px 16px 26px 0;
+    border-bottom: 1px solid var(--line-2);
+    text-decoration: none;
+    position: relative;
     transition: background .16s ease, padding .16s ease;
   }
+
   .entry::before {
-    content: ""; position: absolute; left: -16px; top: 0; bottom: 0; width: 2px;
-    background: var(--accent); opacity: 0; transition: opacity .16s ease;
+    content: "";
+    position: absolute;
+    left: -16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .16s ease;
   }
-  .entry:hover { background: var(--surface); }
-  .entry:hover::before { opacity: 1; }
-  .entry:hover .e-title { color: var(--accent); }
-  .entry:hover .e-num { color: var(--accent); }
-  .entry:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .entry:hover {
+    background: var(--surface);
+  }
+
+  .entry:hover::before {
+    opacity: 1;
+  }
+
+  .entry:hover .e-title {
+    color: var(--accent);
+  }
+
+  .entry:hover .e-num {
+    color: var(--accent);
+  }
+
+  .entry:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   .e-num {
     font-family: -apple-system, 'Inter', system-ui, sans-serif;
-    font-size: 12px; font-weight: 600; color: var(--ink-4);
-    padding-top: 7px; letter-spacing: 0.05em; transition: color .16s ease;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-4);
+    padding-top: 7px;
+    letter-spacing: 0.05em;
+    transition: color .16s ease;
   }
+
   .e-title {
-    display: block; font-family: -apple-system, 'Inter', system-ui, sans-serif;
-    font-size: 21px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.28;
-    color: var(--ink); margin: 0 0 7px; transition: color .16s ease;
+    display: block;
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.28;
+    color: var(--ink);
+    margin: 0 0 7px;
+    transition: color .16s ease;
   }
-  .e-desc { font-size: 16.5px; color: var(--ink-2); margin: 0 0 11px; line-height: 1.52; }
-  .e-meta { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12.5px; color: var(--ink-3); margin: 0; }
-  .e-meta b { font-weight: 600; color: var(--ink-2); }
 
-  /* Framework entries */
+  .e-desc {
+    font-size: 16.5px;
+    color: var(--ink-2);
+    margin: 0 0 11px;
+    line-height: 1.52;
+  }
+
+  .e-meta {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin: 0;
+  }
+
+  .e-meta b {
+    font-weight: 600;
+    color: var(--ink-2);
+  }
+
+  /* ---------- Framework entries ---------- */
+
   .fw {
-    display: grid; grid-template-columns: 40px 1fr; gap: 0 16px;
-    padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line-2);
-    text-decoration: none; position: relative; transition: background .16s ease;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0 16px;
+    padding: 18px 16px 18px 0;
+    border-bottom: 1px solid var(--line-2);
+    text-decoration: none;
+    position: relative;
+    transition: background .16s ease;
   }
-  .fw::before {
-    content: ""; position: absolute; left: -16px; top: 0; bottom: 0; width: 2px;
-    background: var(--accent); opacity: 0; transition: opacity .16s ease;
-  }
-  .fw:hover { background: var(--surface); }
-  .fw:hover::before { opacity: 1; }
-  .fw:hover .fw-title { color: var(--accent); }
-  .fw:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .fw-step { font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; color: var(--ink-4); padding-top: 5px; }
-  .fw-title { display: block; font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 4px; transition: color .16s ease; }
-  .fw-desc { font-size: 15.5px; color: var(--ink-3); margin: 0; line-height: 1.5; }
-  .fw-desc b { color: var(--ink-2); font-weight: 600; }
 
-  /* About */
-  .about p { margin: 18px 0 0; max-width: 42em; }
+  .fw::before {
+    content: "";
+    position: absolute;
+    left: -16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .16s ease;
+  }
+
+  .fw:hover {
+    background: var(--surface);
+  }
+
+  .fw:hover::before {
+    opacity: 1;
+  }
+
+  .fw:hover .fw-title {
+    color: var(--accent);
+  }
+
+  .fw:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .fw-step {
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-4);
+    padding-top: 5px;
+  }
+
+  .fw-title {
+    display: block;
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+    transition: color .16s ease;
+  }
+
+  .fw-desc {
+    font-size: 15.5px;
+    color: var(--ink-3);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .fw-desc b {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+
+  /* ---------- About ---------- */
+
+  .about p {
+    margin: 18px 0 0;
+    max-width: 42em;
+  }
+
   .interests {
     font-family: -apple-system, 'Inter', system-ui, sans-serif;
-    font-size: 13px; color: var(--ink-3); margin-top: 26px;
-    padding: 14px 18px; background: var(--accent-bg); border-radius: 4px;
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 26px;
+    padding: 14px 18px;
+    background: var(--accent-bg);
+    border-radius: 4px;
   }
-  .interests b { color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+
+  .interests b {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- Footer ---------- */
 
   footer.site {
-    margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
-    font-family: -apple-system, 'Inter', system-ui, sans-serif; font-size: 13px;
-    color: var(--ink-3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: -apple-system, 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--ink-3);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
-  footer.site a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line); }
-  footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-  footer.site .links a { margin-left: 18px; }
-  footer.site .links a:first-child { margin-left: 0; }
+
+  footer.site a {
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+
+  footer.site a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  footer.site .links a {
+    margin-left: 18px;
+  }
+
+  footer.site .links a:first-child {
+    margin-left: 0;
+  }
 
   /* ---------- Responsive ---------- */
+
   @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; gap: 0; }
-    .rail { position: static; padding: 52px 0 0; border-bottom: 1px solid var(--line); padding-bottom: 32px; }
-    .rail .name { font-size: 34px; }
-    .rail .name span { display: inline; }
-    .rail .lede { max-width: 34em; font-size: 17px; }
-    .rail-links { display: flex; flex-wrap: wrap; gap: 0 22px; margin-bottom: 24px; }
-    .rail-links a { border: none; padding: 4px 0; }
-    .rail-links a:first-child { border-top: none; }
-    .rail-links a { border-bottom: 1px solid var(--line); }
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
-    main { padding-top: 44px; }
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .rail {
+      position: static;
+      padding: 52px 0 0;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 32px;
+    }
+
+    .rail .name {
+      font-size: 34px;
+    }
+
+    .rail .name span {
+      display: inline;
+    }
+
+    .rail .lede {
+      max-width: 34em;
+      font-size: 17px;
+    }
+
+    .rail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 22px;
+      margin-bottom: 24px;
+    }
+
+    .rail-links a {
+      border: none;
+      padding: 4px 0;
+    }
+
+    .rail-links a:first-child {
+      border-top: none;
+    }
+
+    .rail-links a {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 24px;
+    }
+
+    main {
+      padding-top: 44px;
+    }
   }
+
   @media (max-width: 640px) {
-    .shell { padding: 0 20px; }
-    body { font-size: 17px; }
-    .rail .name { font-size: 29px; }
-    .e-title { font-size: 19px; }
-    .e-desc { font-size: 16px; }
-    .entry, .fw { grid-template-columns: 28px 1fr; gap: 0 12px; padding-right: 0; }
-    .entry::before, .fw::before { left: -12px; }
-    .stats { grid-template-columns: 1fr; }
-    footer.site { flex-direction: column; gap: 12px; }
-    footer.site .links a { margin-left: 0; margin-right: 18px; }
+    .shell {
+      padding: 0 20px;
+    }
+
+    body {
+      font-size: 17px;
+    }
+
+    .rail .name {
+      font-size: 29px;
+    }
+
+    .e-title {
+      font-size: 19px;
+    }
+
+    .e-desc {
+      font-size: 16px;
+    }
+
+    .entry,
+    .fw {
+      grid-template-columns: 28px 1fr;
+      gap: 0 12px;
+      padding-right: 0;
+    }
+
+    .entry::before,
+    .fw::before {
+      left: -12px;
+    }
+
+    .stats {
+      grid-template-columns: 1fr;
+    }
+
+    footer.site {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    footer.site .links a {
+      margin-left: 0;
+      margin-right: 18px;
+    }
   }
+
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; }
+    html {
+      scroll-behavior: auto;
+    }
+
+    * {
+      transition: none !important;
+    }
   }
 </style>
 </head>
+
 <body>
+
 <div class="shell">
 <div class="layout">
 
   <aside class="rail">
-    <h1 class="name"><span>Sreeraj</span><span>Janardhanan</span></h1>
+
+    <h1 class="name">
+      <span>Sreeraj</span>
+      <span>Janardhanan</span>
+    </h1>
+
     <div class="rule"></div>
-    <p class="positioning">Product Strategy &amp; Growth &middot; Consumer Fintech &middot; 0&rarr;1</p>
-    <p class="lede">I turn behavioural insight, experimentation and data into product decisions that improve customer journeys and move business outcomes.</p>
+
+    <p class="positioning">
+      Product Strategy &amp; Growth &middot; Consumer Fintech &middot; 0&rarr;1
+    </p>
+
+    <p class="lede">
+      I turn behavioural insight, experimentation and data into product decisions that improve customer journeys and move business outcomes.
+    </p>
 
     <nav class="rail-links">
-      <a href="#work">Selected work <span class="arw">&darr;</span></a>
-      <a href="Sreeraj_Janardhanan_Resume.pdf">Resume <span class="arw">&#8599;</span></a>
-      <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn <span class="arw">&#8599;</span></a>
-      <a href="mailto:sreerajjan18@gmail.com">Email <span class="arw">&#8599;</span></a>
+      <a href="#work">
+        Selected work <span class="arw">&darr;</span>
+      </a>
+
+      <a href="Sreeraj_Janardhanan_Resume.pdf">
+        Resume <span class="arw">&#8599;</span>
+      </a>
+
+      <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107"
+         target="_blank"
+         rel="noopener">
+        LinkedIn <span class="arw">&#8599;</span>
+      </a>
+
+      <a href="mailto:sreerajjan18@gmail.com">
+        Email <span class="arw">&#8599;</span>
+      </a>
     </nav>
 
     <div class="stats">
-      <div class="row"><span class="n">9 years</span><span class="l">Product &amp; strategy</span></div>
-      <div class="row"><span class="n">20M+</span><span class="l">MAU consumer platforms</span></div>
-      <div class="row"><span class="n">15+</span><span class="l">Lending &amp; financial journeys</span></div>
-      <div class="row"><span class="n">&#8377;1,500 Cr</span><span class="l">Incremental annual revenue</span></div>
+
+      <div class="row">
+        <span class="n">9 years</span>
+        <span class="l">Product &amp; strategy</span>
+      </div>
+
+      <div class="row">
+        <span class="n">20M+</span>
+        <span class="l">MAU consumer platforms</span>
+      </div>
+
+      <div class="row">
+        <span class="n">15+</span>
+        <span class="l">Lending &amp; financial journeys</span>
+      </div>
+
+      <div class="row">
+        <span class="n">&#8377;1,500 Cr</span>
+        <span class="l">Incremental annual revenue</span>
+      </div>
+
     </div>
+
   </aside>
 
   <main>
 
+    <!-- ---------- Selected Work ---------- -->
+
     <section id="work">
-      <div class="sec-head"><h2>Selected work</h2><span class="count">3 case studies</span></div>
+
+      <div class="sec-head">
+        <h2>Selected work</h2>
+        <span class="count">3 case studies</span>
+      </div>
+
       <div class="sec-rule"></div>
 
       <a class="entry" href="pdp-disclosure.html">
+
         <span class="e-num">01</span>
+
         <span>
-          <span class="e-title">When transparency became friction</span>
-          <p class="e-desc">Best-practice UX said full disclosure. Conversion stalled. We reframed a Business Loan page from a disclosure surface into an engagement surface &mdash; and got Legal to sign it off before the first test went live.</p>
-          <p class="e-meta">Business Loan PDP &middot; <b>+15pp application starts</b> &middot; +14% end-to-end conversion &middot; 6 min</p>
+
+          <span class="e-title">
+            When transparency became friction
+          </span>
+
+          <p class="e-desc">
+            Best-practice UX said full disclosure. Conversion stalled. We reframed a Business Loan page from a disclosure surface into an engagement surface &mdash; and got Legal to sign it off before the first test went live.
+          </p>
+
+          <p class="e-meta">
+            Business Loan PDP &middot;
+            <b>+15pp application starts</b>
+            &middot; +14% end-to-end conversion &middot; 6 min
+          </p>
+
         </span>
+
       </a>
+
 
       <a class="entry" href="rmdv2.html">
+
         <span class="e-num">02</span>
+
         <span>
-          <span class="e-title">The JLR playbook wasn't enough</span>
-          <p class="e-desc">A 0&rarr;1 requirements platform at Tata Motors, rebuilt around an engineering culture the reference model didn't account for. Half the product I shipped had nothing to copy from.</p>
-          <p class="e-meta">RMDV2 &middot; <b>~50 vehicle programmes at exit, ~300 today</b> &middot; 2017&ndash;2021 &middot; 9 min</p>
+
+          <span class="e-title">
+            The JLR playbook wasn't enough
+          </span>
+
+          <p class="e-desc">
+            A 0&rarr;1 requirements platform at Tata Motors, rebuilt around an engineering culture the reference model didn't account for. Half the product I shipped had nothing to copy from.
+          </p>
+
+          <p class="e-meta">
+            RMDV2 &middot;
+            <b>50+ vehicle programmes at exit, 300+ today</b>
+            &middot; 2017&ndash;2021 &middot; 9 min
+          </p>
+
         </span>
+
       </a>
+
 
       <a class="entry" href="search-audit.html">
+
         <span class="e-num">03</span>
+
         <span>
-          <span class="e-title">When search works for browsers but fails for owners</span>
-          <p class="e-desc">An audit of an Indian NBFC's search surface, and why roughly half of search demand was structurally underserved. The outcome wasn't a fix &mdash; it was ownership of a surface nobody owned.</p>
-          <p class="e-meta">Search audit &middot; <b>247 keywords &middot; 1.87M sessions</b> &middot; 8 min</p>
+
+          <span class="e-title">
+            When search works for browsers but fails for owners
+          </span>
+
+          <p class="e-desc">
+            An audit of an Indian NBFC's search surface, and why roughly half of search demand was structurally underserved. The outcome wasn't a fix &mdash; it was ownership of a surface nobody owned.
+          </p>
+
+          <p class="e-meta">
+            Search audit &middot;
+            <b>247 keywords &middot; 1.87M sessions</b>
+            &middot; 8 min
+          </p>
+
         </span>
+
       </a>
+
     </section>
+
+
+    <!-- ---------- How I Think ---------- -->
 
     <section id="thinking">
-      <div class="sec-head"><h2>How I think</h2><span class="count">3 frameworks</span></div>
+
+      <div class="sec-head">
+        <h2>How I think</h2>
+        <span class="count">3 frameworks</span>
+      </div>
+
       <div class="sec-rule"></div>
-      <p class="sec-note">Three frameworks i use to move from run problem discovery to product decision. Each one shows up in the case studies above.</p>
+
+      <p class="sec-note">
+        Three frameworks I use to move from problem discovery to product decision. Each one shows up in the case studies above.
+      </p>
+
 
       <a class="fw" href="three-lens.html">
+
         <span class="fw-step">01</span>
+
         <span>
-          <span class="fw-title">Three-lens triangulation</span>
-          <p class="fw-desc"><b>Find the tension.</b> Business, industry and consumer evidence, held open until one domain contradicts another.</p>
+
+          <span class="fw-title">
+            Three-lens triangulation
+          </span>
+
+          <p class="fw-desc">
+            <b>Find the tension.</b>
+            Business, industry and consumer evidence, held open until one domain contradicts another.
+          </p>
+
         </span>
+
       </a>
+
 
       <a class="fw" href="worn-path.html">
+
         <span class="fw-step">02</span>
+
         <span>
-          <span class="fw-title">The Worn Path</span>
-          <p class="fw-desc"><b>Find the behavioural marker.</b> Where users actually go versus where the product assumed they would.</p>
+
+          <span class="fw-title">
+            The Worn Path
+          </span>
+
+          <p class="fw-desc">
+            <b>Find the behavioural marker.</b>
+            Where users actually go versus where the product assumed they would.
+          </p>
+
         </span>
+
       </a>
+
 
       <a class="fw" href="hierarchy-of-product-needs.html">
+
         <span class="fw-step">03</span>
+
         <span>
-          <span class="fw-title">The Hierarchy of Product Needs</span>
-          <p class="fw-desc"><b>Diagnose the layer.</b> Utility, usability, experience &mdash; and which one is actually failing.</p>
+
+          <span class="fw-title">
+            The Hierarchy of Product Needs
+          </span>
+
+          <p class="fw-desc">
+            <b>Diagnose the layer.</b>
+            Utility, usability, experience &mdash; and which one is actually failing.
+          </p>
+
         </span>
+
       </a>
+
     </section>
+
+
+    <!-- ---------- Writing ---------- -->
 
     <section id="writing">
-      <div class="sec-head"><h2>Writing</h2><span class="count">2 essays</span></div>
+
+      <div class="sec-head">
+        <h2>Writing</h2>
+        <span class="count">2 essays</span>
+      </div>
+
       <div class="sec-rule"></div>
+
 
       <a class="entry" href="share-shift-market-make.html">
+
         <span class="e-num">01</span>
+
         <span>
-          <span class="e-title">Share-shifting vs. market-making</span>
-          <p class="e-desc">Two postures for entering a mature category, and why incumbents almost always pick the wrong one. Zerodha, Groww, and the 87% of India's household gold that has never seen a formal lender.</p>
-          <p class="e-meta">Essay &middot; 8 min</p>
+
+          <span class="e-title">
+            Share-shifting vs. market-making
+          </span>
+
+          <p class="e-desc">
+            Two postures for entering a mature category, and why incumbents almost always pick the wrong one. Zerodha, Groww, and the 87% of India's household gold that has never seen a formal lender.
+          </p>
+
+          <p class="e-meta">
+            Essay &middot; 8 min
+          </p>
+
         </span>
+
       </a>
+
 
       <a class="entry" href="discover-weekly.html">
+
         <span class="e-num">02</span>
+
         <span>
-          <span class="e-title">Your listening data is lying about you</span>
-          <p class="e-desc">How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead.</p>
-          <p class="e-meta">Essay &middot; 4 min</p>
+
+          <span class="e-title">
+            Your listening data is lying about you
+          </span>
+
+          <p class="e-desc">
+            How Spotify built Discover Weekly by ignoring the obvious data and tracking taste instead.
+          </p>
+
+          <p class="e-meta">
+            Essay &middot; 4 min
+          </p>
+
         </span>
+
       </a>
+
     </section>
+
+
+    <!-- ---------- About ---------- -->
 
     <section id="about" class="about">
-      <div class="sec-head"><h2>About</h2></div>
+
+      <div class="sec-head">
+        <h2>About</h2>
+      </div>
+
       <div class="sec-rule"></div>
-      <p>Nine years across consumer fintech and automotive. I currently work on product strategy and new ventures at a large Indian non-bank lender, across seven business tracks spanning lending, payments and wealth management &mdash; mostly the 0&rarr;1 end, where the problem hasn't been framed yet.</p>
-      <p>Before that I owned lending and credit journeys on a 20M+ MAU platform, and before that I built a requirements-management platform at Tata Motors. The through-line is behavioural research and experimentation used to find bets rather than to justify them. Some of my current work isn't public; happy to talk through it.</p>
-      <p class="interests"><b>CURRENTLY INTERESTED IN</b> &nbsp;&middot;&nbsp; Consumer fintech &nbsp;&middot;&nbsp; Growth &nbsp;&middot;&nbsp; 0&rarr;1 &nbsp;&middot;&nbsp; AI-enabled products</p>
+
+      <p>
+        Nine years across consumer fintech and automotive. I currently work on product strategy and new ventures at a large Indian non-bank lender, across seven business tracks spanning lending, payments and wealth management &mdash; mostly the 0&rarr;1 end, where the problem hasn't been framed yet.
+      </p>
+
+      <p>
+        Before that I owned lending and credit journeys on a 20M+ MAU platform, and before that I built a requirements-management platform at Tata Motors. The through-line is behavioural research and experimentation used to find bets rather than to justify them. Some of my current work isn't public; happy to talk through it.
+      </p>
+
+      <p class="interests">
+        <b>CURRENTLY INTERESTED IN</b>
+        &nbsp;&middot;&nbsp;
+        Consumer fintech
+        &nbsp;&middot;&nbsp;
+        Growth
+        &nbsp;&middot;&nbsp;
+        0&rarr;1
+        &nbsp;&middot;&nbsp;
+        AI / Applied AI
+      </p>
+
     </section>
 
+
+    <!-- ---------- Footer ---------- -->
+
     <footer class="site">
-      <span>&copy; 2026 Sreeraj Janardhanan</span>
-      <span class="links">
-        <a href="mailto:sreerajjan18@gmail.com">Email</a>
-        <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="Sreeraj_Janardhanan_Resume.pdf">Resume</a>
+
+      <span>
+        &copy; 2026 Sreeraj Janardhanan
       </span>
+
+      <span class="links">
+
+        <a href="mailto:sreerajjan18@gmail.com">
+          Email
+        </a>
+
+        <a href="https://linkedin.com/in/sreeraj-janardhanan-701769107"
+           target="_blank"
+           rel="noopener">
+          LinkedIn
+        </a>
+
+        <a href="Sreeraj_Janardhanan_Resume.pdf">
+          Resume
+        </a>
+
+      </span>
+
     </footer>
 
   </main>
+
 </div>
 </div>
+
 </body>
 </html>
-
